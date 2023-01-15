@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "moneycontrol_api"
-version = "1.0.3"
+version = "1.0.4"
 authors = [
   { name="Arabian Coconut", email="x48cl9zm@duck.com" },
 ]
@@ -19,4 +19,4 @@ classifiers = [
 
 
 [project.urls]
-"Homepage" = "https://github.com/ArabianCoconut/Money-control-api"
+"Homepage" = "https://github.com/ArabianCoconut/Moneycontrol-api"
