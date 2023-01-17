@@ -1,5 +1,5 @@
 # Description 
-* This is a python wrapper for moneycontrol.com, which provides you with the latest news and buisness news from moneycontrol.com
+This is a python wrapper for moneycontrol.com, which provides you with the latest news and buisness news from moneycontrol.com
 
 # Installation
 `pip install moneycontrol-api`<br>
