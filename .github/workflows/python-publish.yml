@@ -6,8 +6,8 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Upload Python Package
-
+name: moneycontrol_api.py
+category: [Python,Continuous Integration]
 on:
   release:
     types: [published]
