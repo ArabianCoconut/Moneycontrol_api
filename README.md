@@ -34,7 +34,7 @@ Date: January 15, 2023 05:08 PM
 -----------------
 ```
 
-### **Todo**
+### **Roadmap**
 
-* Add more functions
-* Output to JSON format
+* Add more function
+* Output to JSON format   - [ X ] Done
