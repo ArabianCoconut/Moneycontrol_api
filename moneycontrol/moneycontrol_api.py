@@ -16,9 +16,7 @@ url=["https://www.moneycontrol.com/news",
 
 def get_news():
     soup = BeautifulSoup(requests.get(url[0]).text, html_parser)
-
     # Get the title, link and date of the news
-    
     related_des_class = soup.find_all("h3", {"class": "related_des"})
     related_date_class = soup.find_all("p", {"class": "related_date hide-mob"})
     for h3_tag,p_tag in zip(related_des_class, related_date_class):
@@ -34,11 +32,10 @@ def get_news():
 
 def get_business_news():
     soup = BeautifulSoup(requests.get(url[1]).text, html_parser)
-
     # Get the title, link and date of the news
     for i in range(1, 24):
-        newlist = "newslist-"+str(i)
-        news_list = soup.find("li", {"class": "clearfix", "id": newlist})
+        new_list = "newslist-"+str(i)
+        news_list = soup.find("li", {"class": "clearfix", "id": new_list})
         news_list_heading_2=soup.find("h1",{"class":"fleft"})
         if news_list:
             title_class = news_list.find("h2").find("a")
@@ -58,7 +55,6 @@ def get_business_news():
 def get_latest_news():
     soup = BeautifulSoup(requests.get(url[2]).text, html_parser)
     # Get the title, link and date of the news
-    
     related_des_class = soup.find_all("h3", {"class": "related_des"})
     related_date_class = soup.find_all("p", {"class": "related_date hide-mob"})
     for h3_tag,p_tag in zip(related_des_class, related_date_class):
