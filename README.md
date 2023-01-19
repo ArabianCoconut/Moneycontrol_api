@@ -5,6 +5,10 @@
 
 This is a python wrapper for moneycontrol.com, which provides you with the latest news and buisness news from moneycontrol.com in JSON format.
 
+## How to guide
+
+[Goto the docs for example code and functions documentation](https://github.com/ArabianCoconutMoneycontrol_api/blob/cb6873613b35d20a4aabff1c4de74655345cde46/Docs)
+
 ### Installation
 
 `pip install moneycontrol-api`
@@ -33,10 +37,3 @@ Link: https://www.moneycontrol.com/news/business/economy/eam-jaishankar-likely-t
 Date: January 15, 2023 05:08 PM
 -----------------
 ```
-
-### How to guide
-
-[Goto the docs](get_news
-### **Roadmap**
-
-[Refer to the GitHub repository for the latest updates](https://github.com/ArabianCoconut/Moneycontrol-api)
