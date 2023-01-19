@@ -36,5 +36,4 @@ Date: January 15, 2023 05:08 PM
 
 ### **Roadmap**
 
-* - [x] Output to JSON format
-* - [ ] Add more functions
+[Refer to the GitHub repository for the latest updates](https://github.com/ArabianCoconut/Moneycontrol-api)

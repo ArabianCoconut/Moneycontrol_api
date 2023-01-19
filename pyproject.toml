@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "moneycontrol_api"
-version = "1.0.6"
+version = "1.0.8"
 authors = [
   { name="Arabian Coconut", email="x48cl9zm@duck.com" },
 ]
@@ -16,6 +16,7 @@ classifiers = [
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: OS Independent",
 ]
+keywords = ["moneycontrol api","moneycontrol"]
 
 [project.urls]
 "Homepage" = "https://github.com/ArabianCoconut/Moneycontrol-api"
