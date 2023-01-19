@@ -7,7 +7,7 @@ This is a python wrapper for moneycontrol.com, which provides you with the lates
 
 ## How to guide
 
-[Goto the docs for example code and functions documentation](https://github.com/ArabianCoconutMoneycontrol_api/blob/cb6873613b35d20a4aabff1c4de74655345cde46/Docs)
+[Goto the docs for example code and functions documentation](https://github.com/ArabianCoconut/Moneycontrol_api/tree/main/Docs)
 
 ### Installation
 
