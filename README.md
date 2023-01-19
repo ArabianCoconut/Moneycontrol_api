@@ -3,7 +3,7 @@
 
 ## Description
 
-This is a python wrapper for moneycontrol.com, which provides you with the latest news and buisness news from moneycontrol.com
+This is a python wrapper for moneycontrol.com, which provides you with the latest news and buisness news from moneycontrol.com in JSON format.
 
 ### Installation
 
@@ -34,6 +34,9 @@ Date: January 15, 2023 05:08 PM
 -----------------
 ```
 
+### How to guide
+
+[Goto the docs](get_news
 ### **Roadmap**
 
 [Refer to the GitHub repository for the latest updates](https://github.com/ArabianCoconut/Moneycontrol-api)
