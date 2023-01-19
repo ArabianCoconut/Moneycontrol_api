@@ -37,5 +37,4 @@ Date: January 15, 2023 05:08 PM
 ### **Roadmap**
 
 * - [x] Output to JSON format
-* - [ ] Add more function
-
+* - [ ] Add more functions
