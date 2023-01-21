@@ -18,7 +18,8 @@ url=["https://www.moneycontrol.com/news",
 
 def get_news():
     """
-    Gets the news from the given URL and returns a JSON object containing the title, link, and date of the news.
+    Gets the news from the given URL and returns a JSON object containing the title, link,
+    and date of the news.
 
     Parameters:
     url (string): The URL from which to retrieve the news
@@ -39,7 +40,8 @@ def get_news():
 
 def get_business_news():
     """
-    Gets the news from the given URL and returns a JSON object containing the title, link, and date of the news.
+    Gets the news from the given URL and returns a JSON object containing the title, link,
+    and date of the news.
 
     Parameters:
     url (string): The URL from which to retrieve the news
@@ -69,7 +71,8 @@ def get_business_news():
 
 def get_latest_news():
     """
-    Gets the news from the given URL and returns a JSON object containing the title, link, and date of the news.
+    Gets the news from the given URL and returns a JSON object containing the title, link,
+    and date of the news.
 
     Parameters:
     url (string): The URL from which to retrieve the news
