@@ -17,6 +17,15 @@ url=["https://www.moneycontrol.com/news",
 "https://www.moneycontrol.com/news/latest-news/"]
 
 def get_news():
+    """
+    Gets the news from the given URL and returns a JSON object containing the title, link, and date of the news.
+
+    Parameters:
+    url (string): The URL from which to retrieve the news
+
+    Returns:
+    json_data (JSON object): A JSON object containing the title, link, and date of the news
+    """
     soup = BeautifulSoup(requests.get(url[0],timeout=60).text, html_parser)
     # Get the title, link and date of the news
     related_des_class = soup.find_all("h3", {"class": "related_des"})
@@ -29,6 +38,15 @@ def get_news():
         return json.dumps(json_data, indent=0)
 
 def get_business_news():
+    """
+    Gets the news from the given URL and returns a JSON object containing the title, link, and date of the news.
+
+    Parameters:
+    url (string): The URL from which to retrieve the news
+
+    Returns:
+    json_data (JSON object): A JSON object containing the title, link, and date of the news
+    """
     soup = BeautifulSoup(requests.get(url[1],timeout=60).text, html_parser)
     # Get the title, link and date of the news
     for i in range(1, 24):
@@ -50,6 +68,15 @@ def get_business_news():
             return None
 
 def get_latest_news():
+    """
+    Gets the news from the given URL and returns a JSON object containing the title, link, and date of the news.
+
+    Parameters:
+    url (string): The URL from which to retrieve the news
+
+    Returns:
+    json_data (JSON object): A JSON object containing the title, link, and date of the news
+    """
     soup = BeautifulSoup(requests.get(url[2],timeout=60).text, html_parser)
     # Get the title, link and date of the news
     related_des_class = soup.find_all("h3", {"class": "related_des"})
