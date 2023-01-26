@@ -1,6 +1,6 @@
 # This workflow will upload a Python Package using Twine when a release is created
 
-name: Upload Python Package to Test PyPI
+name: Upload Python Package to Test PyPI and Main PyPI
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
         repository_url: https://test.pypi.org/legacy/
 
 # Update to Main PyPI when ready
-name: Upload Python Package to Main PyPI
+run-name: Upload Python Package to Main PyPI
 
 on:
   pull_request:
