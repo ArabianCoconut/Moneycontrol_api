@@ -3,9 +3,9 @@
 name: Upload Python Package to Test PyPI
 
 on:
-  push:
+  merge:
     branches:
-    - 'Testing'
+    - 'main'
 
 permissions:
   contents: read
@@ -31,5 +31,5 @@ jobs:
       uses: pypa/gh-action-pypi-publish@v1.6.4
       with:
         user: __token__
-        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        repository_url: https://test.pypi.org/legacy/
+        password: ${{ secrets.MAIN_PYPI_API_TOKEN }}
+        repository_url: https://upload.pypi.org/legacy/
