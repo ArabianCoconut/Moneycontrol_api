@@ -12,7 +12,6 @@ on:
   push:
     branches:
     - 'Testing'
-    - 'main'
 
 permissions:
   contents: read
