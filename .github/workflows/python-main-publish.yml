@@ -3,14 +3,18 @@
 name: Upload Python Package to Test PyPI
 
 on:
-  merge:
-    branches:
-    - 'main'
+  pull_request:
+    types: 
+      - closed
+      branches: 
+        - 'main'
 
 permissions:
   contents: read
 
 jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
   deploy:
 
     runs-on: ubuntu-latest
