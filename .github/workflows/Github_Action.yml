@@ -11,6 +11,8 @@ permissions:
 
 jobs:
   job_test:
+    name: Upload Python Package to Test PyPI
+    if: event.github.merge == false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -32,6 +34,7 @@ jobs:
         password: ${{ secrets.TEST_PYPI_API_TOKEN }}
         repository_url: https://test.pypi.org/legacy/
   job_main:
+    name: Upload Python Package to Main PyPI
     if: event.github.merge == true
     runs-on: ubuntu-latest
     steps:
