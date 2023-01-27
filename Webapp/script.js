@@ -1,12 +1,16 @@
-// Web version of python API
-
-// Global variables
-const url=["https://www.moneycontrol.com/news",
+const url = [
+"https://www.moneycontrol.com/news/news-all/",
 "https://www.moneycontrol.com/news/business",
-"https://www.moneycontrol.com/news/latest-news/"]
+"https://www.moneycontrol.com/news/latest-news/"
 
-// Function to get the news
-function getNews(){
-    console.log("Getting news from "+url[0]);
+]
 
-};
+
+// Web Api
+
+onload = function getNews() {
+    fetch(url[0])
+    .then(response => response.text().title())
+    .then(data => document.getElementById("test").innerHTML = data);
+    console.log(data);
+}

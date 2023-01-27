@@ -132,3 +132,4 @@ dmypy.json
 .pyrc
 .vscode
 Dev_notes.txt
+.devcontainer/devcontainer.json
