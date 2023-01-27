@@ -22,7 +22,6 @@ let title = data.then((html) => {
     if (title.title == "") {
         continue;
     };
-    console.log(title.title);
 };
 
 });
@@ -38,7 +37,6 @@ let date = data.then((html) => {
     if (date.date == "") {
         continue;
     };
-    console.log(date.date);
     };
 });
 
@@ -52,7 +50,7 @@ let link = data.then((html) => {
     if (link.link == "") {
         continue;
     }
-    // console.log(link.link);
+
     };
 })
 

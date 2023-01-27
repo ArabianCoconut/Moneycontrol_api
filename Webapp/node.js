@@ -9,7 +9,6 @@ async function getWebData() {
     await page.goto('https://www.moneycontrol.com/news/india/');
 
     for(let i = 1; i <= 24; i++) {
-    // console.log(i);
     let li_count= '//*[@id="newslist-'+i+'"]';
     const [element] = await page.$x(li_count);
     let elementTxt = await (await element.getProperty('innerText')).jsonValue();
