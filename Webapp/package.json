@@ -1,14 +1,5 @@
 {
-  "name": "script.js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
-  "scripts": {
-    "start": "node script.js"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "jsdom": "^21.1.0"
+    "puppeteer": "^19.6.1"
   }
 }

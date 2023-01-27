@@ -1,0 +1,21 @@
+{
+  "name": "moneycontrol-api",
+  "version": "1.0.0",
+  "description": "## Description",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node node.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArabianCoconut/Moneycontrol-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArabianCoconut/Moneycontrol-api/issues"
+  },
+  "homepage": "https://github.com/ArabianCoconut/Moneycontrol-api#readme"
+}
