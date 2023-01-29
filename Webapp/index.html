@@ -7,9 +7,20 @@
     <title>Testing Api</title>
 </head>
 <body>
-    <div id="test">
+    <h1>Live Api Testing and Demo output</h1>
+   <label>Test</label>
+   
+   <select id="api" name="api">
+        <option value="NApi">Get News</option>
+        <option value="BApi">Get Business news</option>
+        <option value="LApi">Get Latest News</option>
+    </select><br></br>
+    <textarea id="demo_out" cols="80" rows="15" wrap="soft"></textarea>
+    <br></br>
 
-    </div>
+    <button id="button" onclick="select()">Fetch Api</button>
+    <button id="button" onclick="clearDemoOut()">Clear</button>
+    <button id="button" onclick="copyDemoOut()">Copy</button>
     <script src="script.js"></script>
 </body>
 </html>
