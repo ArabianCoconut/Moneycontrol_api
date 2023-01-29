@@ -7,10 +7,10 @@
     <title>Testing Api</title>
 </head>
 <body>
-    <h1>Live Api Testing and Demo output</h1>
-   <label>Test</label>
+    <h1 style="text-align: center;">Live Api Testing and Demo output</h1><br></br>
+   <label><b>Choose Api:</b> </label>
    
-   <select id="api" name="api">
+   <select id="api" name="api" style="border-radius: 10px; fill: white;">
         <option value="NApi">Get News</option>
         <option value="BApi">Get Business news</option>
         <option value="LApi">Get Latest News</option>
@@ -18,9 +18,13 @@
     <textarea id="demo_out" cols="80" rows="15" wrap="soft"></textarea>
     <br></br>
 
-    <button id="button" onclick="select()">Fetch Api</button>
-    <button id="button" onclick="clearDemoOut()">Clear</button>
-    <button id="button" onclick="copyDemoOut()">Copy</button>
+    <button id="button" onclick="select()" style="border-radius: 5px;">Fetch Api</button>
+    <button id="button_2" onclick="clearDemoOut()" style="border-radius: 5px;">Clear</button>
+    <button id="button_3" onclick="copyDemoOut()" style="border-radius: 5px;">Copy</button>
     <script src="script.js"></script>
 </body>
+<br></br>
+<footer style="border:1px solid black;text-align: center;">
+    <p>Created by <a href="">Arabian Coconut Copyrights 2023</a></p>
+</footer>
 </html>
