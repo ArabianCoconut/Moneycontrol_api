@@ -113,9 +113,9 @@ async function copyDemoOut() {
     const copyText = document.getElementById("demo_out");
     try {
       await navigator.clipboard.writeText(copyText.value);
-      copyText.innerHTML = "Copied text!";
+      copyText.innerHTML = "Text Copied !";
     } catch (error) {
-      console.error("Failed to copy text: ", error);
+      copyText.innerHTML = "Error Occurred ! "+ error;
     }
   }
   
