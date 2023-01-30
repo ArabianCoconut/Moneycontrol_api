@@ -3,11 +3,13 @@
 
 ## Description
 
-This is a python wrapper for moneycontrol.com, which provides you with the latest news and buisness news from moneycontrol.com in JSON format.
+This is a python wrapper for moneycontrol.com, which provides you with the latest news and business news from moneycontrol.com in JSON format.
 
-## How to guide
+## How to guide and demos
 
-[Goto the docs for example code and functions documentation](https://github.com/ArabianCoconut/Moneycontrol_api/tree/main/Docs)
+* [Goto the docs for example code and functions documentation](https://github.com/ArabianCoconut/Moneycontrol_api/tree/main/Docs)
+
+* [You may also visit the live demo](https://arabiancoconut.is-cool.dev/webapps/mcapi/index.html)
 
 ### Installation
 
