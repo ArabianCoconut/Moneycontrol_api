@@ -1,6 +1,8 @@
 
 # MoneyControl Api
 
+## Status of project: **Semi-Active**
+
 ## Description
 
 This is a python wrapper for moneycontrol.com, which provides you with the latest news and business news from moneycontrol.com in JSON format.
@@ -39,3 +41,5 @@ Link: https://www.moneycontrol.com/news/business/economy/eam-jaishankar-likely-t
 Date: January 15, 2023 05:08 PM
 -----------------
 ```
+
+### Project undergoing **containerization** and will be deployed somewhere else.

@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "moneycontrol_api"
-version = "1.0.9"
+version = "1.1.0"
 authors = [
   { name="Arabian Coconut", email="x48cl9zm@duck.com" },
 ]
-description = "Moneycontrol API is a python library to get news data from moneycontrol.com"
+description = "Moneycontrol API is a python library to get news data from moneycontrol.com in JSON format."
 readme = "README.md"
 requires-python = ">=3.0"
 classifiers = [
