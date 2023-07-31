@@ -1,5 +1,6 @@
+import json
+import requests
 from bs4 import BeautifulSoup
-import requests, json
 
 # Api for getting the latest news from moneycontrol.com
 
@@ -50,23 +51,14 @@ def get_business_news():
     """
     soup = BeautifulSoup(requests.get(url[1], timeout=60).text, html_parser)
     # Get the title, link and date of the news
-    for i in range(1, 24):
-        new_list = "newslist-" + str(i)
-        news_list = soup.find("li", {"class": "clearfix", "id": new_list})
-        news_list_heading_2 = soup.find("h1", {"class": "fleft"})
-        if news_list:
-            title_class = news_list.find("h2").find("a")
-            title = title_class.get("title")
-            link = title_class.get("href")
-            date_class = news_list.find("span")
-            date = date_class.text
-            print(news_type, news_list_heading_2.text)
-            json_data = {news_type: news_list_heading_2.text,
-                         title_text: title, link_text: link, date_text: date}
-            return json.dumps(json_data, indent=0)
-        else:
-            print(f"li element with class 'clearfix' and id '{id}' not found.")
-            return None
+    new_list = "newslist-0"
+    news_list = soup.find("li", {"class": "clearfix", "id": new_list})
+    title = news_list.find("h2").find("a").get("title")
+    link = news_list.find("h2").find("a").get("href")
+    date = news_list.find("span", {"class": "list_dt"})
+    json_data = {news_type: "Business News", title_text: title, link_text: link, date_text: date}
+    print(json_data)
+    return json.dumps(json_data, indent=0)
 
 
 def get_latest_news():
@@ -90,6 +82,3 @@ def get_latest_news():
         date = p_tag.text
         json_data = {news_type: "Latest News", title_text: title, link_text: link, date_text: date}
         return json.dumps(json_data, indent=0)
-
-# # get_business_news()
-# # get_latest_news()
