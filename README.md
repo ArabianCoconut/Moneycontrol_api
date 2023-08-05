@@ -1,25 +1,30 @@
 
 # MoneyControl Api
+### Status of project: **Complete**
+#### Author: Arabian Coconut
+#### Version: 1.0.0
 
+---
 ## Description
 
-This is a python wrapper for moneycontrol.com, which provides you with the latest news and business news from moneycontrol.com in JSON format.
+This is a python API for moneycontrol.com, which provides you with the news, latest news, and 
+business news from moneycontrol.com in JSON format for your server's integration.
 
-## How to guide and demos
-
-* [Goto the docs for example code and functions documentation](https://github.com/ArabianCoconut/Moneycontrol_api/tree/main/Docs)
-
-* [You may also visit the live demo](https://arabiancoconut.is-cool.dev/webapps/mcapi/index.html)
-
-### Installation
+## How to use api
+```shell
+wget https://mc-api-j0rn.onrender.com/api/news 
+wget https://mc-api-j0rn.onrender.com/api/latest_news
+wget https://mc-api-j0rn.onrender.com/api/business_news
+ ```
+### Installation for local implementation
 
 `pip install moneycontrol-api`
 
-### Usage
+### Usage for local implementation
 
 `from moneycontrol import moneycontrol_api`
 
-### All supported functions
+### Supported API functions
 
 * get_news
 
@@ -27,15 +32,13 @@ This is a python wrapper for moneycontrol.com, which provides you with the lates
 
 * get_business_news
 
-### Output
+### Output format
 
-``` text
---------------------
-News Type: News
-Title: EAM Jaishankar likely to visit Sri Lanka on Jan 19; talks on debt restructuring expected`
-
-Link: https://www.moneycontrol.com/news/business/economy/eam-jaishankar-likely-to-visit-sri-lanka-on-jan-19-talks-on-debt-restructuring-expected-9868001.html 
-
-Date: January 15, 2023 05:08 PM
------------------
+``` json
+{
+  "News Type:": "Latest News",
+  "Title:": "Chhattisgarh CM transfers Rs 15 crore online to beneficiaries as part of Godhan Nyay Yojana",
+  "Link:": "https://www.moneycontrol.com/news/india/chhattisgarh-cm-transfers-rs-15-crore-online-to-beneficiaries-as-part-of-godhan-nyay-yojana-11103381.html",
+  "Date:": "August 05, 2023 05:08 PM"
+}
 ```

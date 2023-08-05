@@ -1,0 +1,12 @@
+.venv
+.git
+.idea
+.github
+Docs
+.gitignore
+.dockerignore
+pyproject.toml
+LICENSE
+README.md
+setup.py
+
