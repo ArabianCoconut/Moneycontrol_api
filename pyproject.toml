@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "moneycontrol_api"
-version = "1.1.dev"
+version = "1.1.dev1"
 authors = [
   { name="Arabian Coconut", email="x48cl9zm@duck.com" },
 ]
