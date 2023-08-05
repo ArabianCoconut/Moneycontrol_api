@@ -18,7 +18,7 @@ RUN pip install --upgrade pip && \
     rm requirements.txt
 
 # CD into Flask directory
-WORKDIR /app/Src
+WORKDIR /app/src
 
 # Run Flask when the container launches
 CMD ["flask","run"]

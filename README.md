@@ -2,7 +2,7 @@
 # MoneyControl Api
 ### Status of project: **Complete**
 #### Author: Arabian Coconut
-#### Version: 1.0.0
+#### Version: 1.1.0
 
 ---
 ## Description
