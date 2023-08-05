@@ -22,7 +22,7 @@ wget https://mc-api-j0rn.onrender.com/api/business_news
 
 ### Usage for local implementation
 
-`from moneycontrol import moneycontrol_api`
+`from moneycontrol import moneycontrol_api as mc`
 
 ### Supported API functions
 
