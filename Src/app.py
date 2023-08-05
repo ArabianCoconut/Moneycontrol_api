@@ -1,4 +1,4 @@
-import moneycontrol.moneycontrol_api as mc
+import Modules.moneycontrol_api as mc
 from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
