@@ -2,7 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-# Api for getting the latest news from Modules.com
+# Api for getting the latest news from moneycontrol.com
 
 # Constants
 title_text = "Title:"
