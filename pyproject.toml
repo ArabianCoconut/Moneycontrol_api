@@ -20,3 +20,4 @@ keywords = ["moneycontrol api","moneycontrol"]
 
 [project.urls]
 "Homepage" = "https://github.com/ArabianCoconut/Moneycontrol-api"
+"Live Demo" = "https://mc-api-j0rn.onrender.com"
