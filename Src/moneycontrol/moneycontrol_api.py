@@ -35,7 +35,7 @@ def get_news():
         title_info = i.find("a").get("title")
         link_info = i.find("a").get("href")
         json_data = {news_type: "News", title_text: title_info, link_text: link_info}
-        return json.dumps(json_data, indent=0)
+        return json.dumps(json_data, indent=1)
 
 
 def get_business_news():
@@ -57,7 +57,6 @@ def get_business_news():
     link = news_list.find("h2").find("a").get("href")
     date = news_list.find("span", {"class": "list_dt"})
     json_data = {news_type: "Business News", title_text: title, link_text: link, date_text: date}
-    print(json_data)
     return json.dumps(json_data, indent=0)
 
 
@@ -82,3 +81,4 @@ def get_latest_news():
         date = p_tag.text
         json_data = {news_type: "Latest News", title_text: title, link_text: link, date_text: date}
         return json.dumps(json_data, indent=0)
+
