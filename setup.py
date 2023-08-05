@@ -10,6 +10,5 @@ long_description = (this_directory / "README.md").read_text()
 setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
-    package_dir={"": "Src"},
-    py_modules=["moneycontrol_api"],
+    py_modules=["moneycontrol_api"]
 )
