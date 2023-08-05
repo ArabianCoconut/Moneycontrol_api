@@ -12,7 +12,7 @@ permissions:
 jobs:
   job_test:
     name: Upload Python Package to Test PyPI
-    if: github.event.pull_request.merged == false
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -35,7 +35,7 @@ jobs:
         repository_url: https://test.pypi.org/legacy/
   job_main:
     name: Upload Python Package to Main PyPI
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
