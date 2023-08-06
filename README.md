@@ -16,6 +16,7 @@ business news from moneycontrol.com in JSON format for your server's integration
 wget https://mc-api-j0rn.onrender.com/api/news 
 wget https://mc-api-j0rn.onrender.com/api/latest_news
 wget https://mc-api-j0rn.onrender.com/api/business_news
+wget https://mc-api-j0rn.onrender.com/api/list
  ```
 ### Installation for local implementation
 
