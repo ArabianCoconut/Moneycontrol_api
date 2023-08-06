@@ -2,7 +2,8 @@
 # MoneyControl Api
 ### Status of project: **Complete**
 #### Author: Arabian Coconut
-#### Version: 1.1.4
+#### Docker Version: 1.1.4
+#### Local Version: 1.1.3
 
 ---
 ## Description
