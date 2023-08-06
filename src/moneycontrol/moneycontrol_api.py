@@ -1,4 +1,3 @@
-import json
 import requests
 from bs4 import BeautifulSoup
 
@@ -81,3 +80,5 @@ def get_latest_news():
         date = p_tag.text
         json_data = {news_type: "Latest News", title_text: title, link_text: link, date_text: date}
         return json_data
+
+
