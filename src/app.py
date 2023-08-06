@@ -1,6 +1,8 @@
+# Author: Arabian Coconut
+# Last Modified: 06/07/2023
 import moneycontrol.moneycontrol_api as mc
-from flask import Flask, request, jsonify, render_template
-
+import json
+from flask import Flask, request, jsonify, render_template, url_for
 app = Flask(__name__)
 
 
@@ -16,12 +18,17 @@ def api(news):
     Returns: json_data (JSON object): A JSON object containing the title, link, and date of the news, business news,
     and latest news.
     """
-    if request.method == 'GET' and news == 'news':
-        return jsonify(mc.get_news())
-    elif request.method == 'GET' and news == 'business':
-        return jsonify(mc.get_business_news())
-    elif request.method == 'GET' and news == 'latest':
-        return jsonify(mc.get_latest_news())
+    if request.method == 'GET':
+        if news == 'news':
+            return jsonify(mc.get_news())
+        elif news == 'business':
+            return jsonify(mc.get_business_news())
+        elif news == 'latest':
+            return jsonify(mc.get_latest_news())
+        elif news == 'list':
+            with open('static/api_data.json', 'r') as f:
+                data = json.load(f)
+            return jsonify(data)
     else:
         return jsonify({"error": "Method not allowed"})
 
@@ -29,8 +36,4 @@ def api(news):
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
-
-
-
-
 

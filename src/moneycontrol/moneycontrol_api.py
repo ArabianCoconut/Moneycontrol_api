@@ -1,3 +1,5 @@
+# Author: Arabian Coconut
+# Last Modified: 06/07/2023
 import json
 import requests
 from bs4 import BeautifulSoup
@@ -16,7 +18,6 @@ url = ["https://www.moneycontrol.com/news",
        "https://www.moneycontrol.com/news/business",
        "https://www.moneycontrol.com/news/latest-news/"]
 
-
 def get_news():
     """
     Gets the news from the given URL and returns a JSON object containing the title, link,
@@ -34,7 +35,7 @@ def get_news():
     for i in soup_process:
         title_info = i.find("a").get("title")
         link_info = i.find("a").get("href")
-        json_data = {news_type: "News", title_text: title_info, link_text: link_info}
+        json_data = {news_type: "News", title_text: title_info, link_text: link_info, date_text: "None"}
         return json_data
 
 
