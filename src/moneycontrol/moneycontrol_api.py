@@ -2,7 +2,6 @@
 # Last Modified: 06/07/2023
 import json
 import requests
-from functools import lru_cache
 from bs4 import BeautifulSoup
 
 # Api for getting the latest news from moneycontrol.com
@@ -19,8 +18,6 @@ url = ["https://www.moneycontrol.com/news",
        "https://www.moneycontrol.com/news/business",
        "https://www.moneycontrol.com/news/latest-news/"]
 
-
-@lru_cache(maxsize=16)
 def get_news():
     """
     Gets the news from the given URL and returns a JSON object containing the title, link,
@@ -42,7 +39,6 @@ def get_news():
         return json_data
 
 
-@lru_cache(maxsize=16)
 def get_business_news():
     """
     Gets the news from the given URL and returns a JSON object containing the title, link,
@@ -65,7 +61,6 @@ def get_business_news():
     return json_data
 
 
-@lru_cache(maxsize=16)
 def get_latest_news():
     """
     Gets the news from the given URL and returns a JSON object containing the title, link,
