@@ -2,7 +2,7 @@
 # MoneyControl Api
 ### Status of project: **Complete**
 #### Author: Arabian Coconut
-#### Version: 1.1.3
+#### Version: 1.1.4
 
 ---
 ## Description
@@ -42,3 +42,8 @@ wget https://mc-api-j0rn.onrender.com/api/business_news
   "Date:": "August 05, 2023 05:08 PM"
 }
 ```
+---
+## Changelog
+* 1.1.4
+    * Added LRU cache to reduce load on server
+    * Added json storage for viewing all requests made to server via /api/list for online demo implementation.
