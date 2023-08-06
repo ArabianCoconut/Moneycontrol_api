@@ -1,3 +1,5 @@
+# Author: Arabian Coconut
+# Last Modified: 06/07/2023
 import json
 import requests
 from functools import lru_cache
