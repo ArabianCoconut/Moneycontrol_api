@@ -38,7 +38,7 @@ wget https://mc-api-j0rn.onrender.com/api/list
 
 ``` json
 {
-  "News Type:": "Latest News",
+  "NewsType:": "Latest News",
   "Title:": "Chhattisgarh CM transfers Rs 15 crore online to beneficiaries as part of Godhan Nyay Yojana",
   "Link:": "https://www.moneycontrol.com/news/india/chhattisgarh-cm-transfers-rs-15-crore-online-to-beneficiaries-as-part-of-godhan-nyay-yojana-11103381.html",
   "Date:": "August 05, 2023 05:08 PM"
