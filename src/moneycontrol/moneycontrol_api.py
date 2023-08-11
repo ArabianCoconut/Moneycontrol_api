@@ -1,9 +1,13 @@
 # Author: Arabian Coconut
-# Last Modified: 06/07/2023
+# Last Modified: 11/08/2023 #DD/MM/YYYY
 # Description: This file contains the API for getting the news from the moneycontrol website.
 import json
-import requests
+import os
+import threading
+import time
 from functools import lru_cache
+import uuid
+import requests
 from bs4 import BeautifulSoup
 
 
@@ -45,7 +49,9 @@ def get_news():
         title_info = i.find("a").get("title")
         link_info = i.find("a").get("href")
         json_output.Data.update({"NewsType": "News", "Title": title_info, "Link": link_info})
+        dict_storage(json_output.Data)
         return json_output.Data
+
 
 @lru_cache(maxsize=16)
 def get_business_news():
@@ -99,7 +105,31 @@ def get_latest_news():
         return json_output.Data
 
 
+def file_remove():
+    # check file size is greater than 1MB
+    # if greater than 1MB then delete the file
+    # else wait for 7 days
+    while True:
+        if os.path.exists(Api().json_file):
+            file_size = os.path.getsize(Api().json_file)
+            if file_size > 1000000:
+                os.remove(Api().json_file)
+                print("File removed successfully")
+                dict_storage(Api().Data)
+                time.sleep(604800)
+            else:
+                print("File size is less than 1MB, check after 7 days")
+                time.sleep(604800)
+        else:
+            time.sleep(604800)
+
+
 def dict_storage(json_format: dict):
+    """
+    Stores the data in a JSON file, and removes the file if the size is greater than 1MB
+    """
+    threading.Thread(target=file_remove).start()
+
     new_entry = {
         "NewsType": json_format["NewsType"],
         "Title": json_format["Title"],
@@ -109,15 +139,14 @@ def dict_storage(json_format: dict):
     data = {}
 
     try:
-        with open('static/api_data.json', 'r') as f:
+        with open(Api().json_file, 'r') as f:
             data = dict(json.load(f))
     except (FileNotFoundError, json.decoder.JSONDecodeError):
-        with open('static/api_data.json', 'w', encoding='utf-8') as f:
+        with open(Api().json_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
 
-    data.setdefault("Api_response", []).append(new_entry)
+    unique_id = str(uuid.uuid4())
+    data[unique_id] = new_entry
 
-    with open('static/api_data.json', 'w', encoding='utf-8') as f:
+    with open(Api().json_file, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
-
-    return data
