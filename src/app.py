@@ -3,6 +3,7 @@
 import moneycontrol.moneycontrol_api as mc
 import json
 from flask import Flask, request, jsonify, render_template, url_for
+
 app = Flask(__name__)
 
 
@@ -29,11 +30,12 @@ def api(news):
             with open('static/api_data.json', 'r') as f:
                 data = json.load(f)
             return jsonify(data)
+        elif news == 'status':
+            return jsonify({"status": "200"})
     else:
-        return jsonify({"error": "Method not allowed"})
+        return jsonify({"error": "Method not allowed or server error"})
 
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
-

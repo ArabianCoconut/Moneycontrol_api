@@ -2,7 +2,7 @@
 # MoneyControl Api
 ### Status of project: **Complete**
 #### Author: Arabian Coconut
-#### Docker Version: 1.1.4
+#### Docker Version: 1.1.5
 #### Local Version: 1.1.3
 
 ---
@@ -17,6 +17,7 @@ wget https://mc-api-j0rn.onrender.com/api/news
 wget https://mc-api-j0rn.onrender.com/api/latest_news
 wget https://mc-api-j0rn.onrender.com/api/business_news
 wget https://mc-api-j0rn.onrender.com/api/list
+wget https://mc-api-j0rn.onrender.com/api/status
  ```
 ### Installation for local implementation
 
@@ -38,7 +39,7 @@ wget https://mc-api-j0rn.onrender.com/api/list
 
 ``` json
 {
-  "News Type:": "Latest News",
+  "NewsType:": "Latest News",
   "Title:": "Chhattisgarh CM transfers Rs 15 crore online to beneficiaries as part of Godhan Nyay Yojana",
   "Link:": "https://www.moneycontrol.com/news/india/chhattisgarh-cm-transfers-rs-15-crore-online-to-beneficiaries-as-part-of-godhan-nyay-yojana-11103381.html",
   "Date:": "August 05, 2023 05:08 PM"
@@ -50,3 +51,8 @@ wget https://mc-api-j0rn.onrender.com/api/list
     * Added LRU cache to reduce load on server
     * Added json storage for viewing all requests made to server via /api/list for online demo implementation.
     * **Note**: Only Docker implementation is updated with this version for local implementation please use 1.1.3 from master branch.
+* 1.1.5
+  * Added unique UUID for each request made to server.
+  * Updated function docs for better understanding of the file_remove and dict_storage.
+  * api_data.json is now deleted after 7 days of creation or updating.
+  * Added new api for server status check.
