@@ -56,4 +56,6 @@ wget https://mc-api-j0rn.onrender.com/api/status
   * Updated function docs for better understanding of the file_remove and dict_storage.
   * api_data.json is now deleted after 7 days of creation or updating.
   * Added new api for server status check.
-
+---
+## Buy me a Coffee :coffee:
+<a href="https://www.buymeacoffee.com/arabiancoconut" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
