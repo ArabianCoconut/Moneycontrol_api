@@ -47,15 +47,16 @@ wget https://mc-api-j0rn.onrender.com/api/status
 ```
 ---
 ## Changelog
-* 1.1.4
-    * Added LRU cache to reduce load on server
-    * Added json storage for viewing all requests made to server via /api/list for online demo implementation.
-    * **Note**: Only Docker implementation is updated with this version for local implementation please use 1.1.3 from master branch.
 * 1.1.5
-  * Added unique UUID for each request made to server.
+  * Added a unique UUID for each request made to the server.
   * Updated function docs for better understanding of the file_remove and dict_storage.
   * api_data.json is now deleted after 7 days of creation or updating.
-  * Added new api for server status check.
+  * Added new API for server status check.
+* 1.1.4
+    * Added LRU cache to reduce the load on the server
+    * Added JSON storage for viewing all requests made to the server via /api/list for online demo implementation.
+    * **Note**: Only Docker implementation is updated with this version for local implementation please use 1.1.3 from the master branch.
+
 ---
 ## Buy me a Coffee :coffee:
 <a href="https://www.buymeacoffee.com/arabiancoconut" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
