@@ -2,7 +2,7 @@
 # MoneyControl Api
 ### Status of project: **Complete**
 #### Author: Arabian Coconut
-#### Docker Version: 1.1.5
+#### Docker Version: 1.1.6
 #### Local Version: 1.1.3
 
 ---
@@ -10,6 +10,10 @@
 
 This is a python API for moneycontrol.com, which provides you with the news, latest news, and 
 business news from moneycontrol.com in JSON format for your server's integration.
+
+Notes: 
+* This API is not affiliated with moneycontrol.com in any way.
+* Master branch is for Docker implementation and Local branch is for local implementation.
 
 ## How to use api
 ```shell
@@ -47,6 +51,9 @@ wget https://mc-api-j0rn.onrender.com/api/status
 ```
 ---
 ## Changelog
+* 1.1.6
+  * Modified Storage handling for better performance.
+  * Removed static folder from the project as its not required folder.
 * 1.1.5
   * Added a unique UUID for each request made to the server.
   * Updated function docs for better understanding of the file_remove and dict_storage.
