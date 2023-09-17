@@ -1,14 +1,15 @@
 # Author: Arabian Coconut
-# Last Modified: 11/08/2023 #DD/MM/YYYY
+# Last Modified: 17/09/2023 #DD/MM/YYYY
 # Description: This file contains the API for getting the news from the moneycontrol website.
-import json
 import os
 import threading
 import time
-from functools import lru_cache
+import storage_control as sc
 import uuid
 import requests
 from bs4 import BeautifulSoup
+from functools import lru_cache
+
 
 
 # Constants
@@ -23,8 +24,8 @@ class Api:
         """
         self.Data = {"NewsType": news_info, "Title": title_info,
                      "Link": link_info, "Date": date_info}
+        self.json_file = "static/data.json"
         self.html_parser = "html.parser"
-        self.json_file = "static/api_data.json"
         self.url = ["https://www.moneycontrol.com/news", "https://www.moneycontrol.com/news/business",
                     "https://www.moneycontrol.com/news/latest-news/"]
 
@@ -131,22 +132,23 @@ def dict_storage(json_format: dict):
     threading.Thread(target=file_remove).start()
 
     new_entry = {
+        "ID":str(uuid.uuid4()),
         "NewsType": json_format["NewsType"],
         "Title": json_format["Title"],
         "Link": json_format["Link"],
         "Date": json_format["Date"]
     }
-    data = {}
+    
+# Load the data into Pickle file
+    sc_instance = sc.StorageControl("data.pkl")
+    file_load = sc_instance.load()
 
     try:
-        with open(Api().json_file, 'r') as f:
-            data = dict(json.load(f))
-    except (FileNotFoundError, json.decoder.JSONDecodeError):
-        with open(Api().json_file, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
-
-    unique_id = str(uuid.uuid4())
-    data[unique_id] = new_entry
-
-    with open(Api().json_file, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+        if file_load is None:
+            sc_instance.save(new_entry)
+        elif file_load.get("Title") != json_format["Title"]:
+            sc_instance.save(new_entry)
+        else:
+            print("Data already exists")
+    except FileNotFoundError:
+        sc_instance.write(new_entry)
