@@ -4,14 +4,14 @@ import os
 
 class StorageControl:
     def __init__(self, file_name):
-        self.file_name = "Moneycontrol_api/src/moneycontrol/"+file_name
+        self.file_name = "moneycontrol/"+file_name
         try:
             open(self.file_name, 'xb').close()
         except FileExistsError:
             pass
         
     def json_path(self):
-        return "Moneycontrol_api/src/moneycontrol/data.json"
+        return "moneycontrol/data.json"
     
     def save(self, data):
         with open(self.file_name, 'ab') as file:
