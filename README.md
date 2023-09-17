@@ -13,7 +13,7 @@ business news from moneycontrol.com in JSON format for your server's integration
 
 Notes: 
 * This API is not affiliated with moneycontrol.com in any way.
-* Master branch is for Docker implementation and Local branch is for local implementation.
+* Master branch is for Docker deploy and Local branch is for local deploy.
 
 ## How to use api
 ```shell
