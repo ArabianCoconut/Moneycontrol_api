@@ -4,7 +4,7 @@
 import os
 import threading
 import time
-import storage_control as sc
+import moneycontrol.storage_control as sc
 import uuid
 import requests
 from bs4 import BeautifulSoup
