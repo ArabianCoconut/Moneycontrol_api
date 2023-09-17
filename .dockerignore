@@ -1,6 +1,6 @@
 # ignore everything
 *
-# except 3 files
+# except 2 files
 !/src
 !/requirements.txt
 !/Dockerfile
