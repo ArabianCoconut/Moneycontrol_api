@@ -1,11 +1,7 @@
-.venv
-.git
-.idea
-.github
-.gitignore
-.dockerignore
-pyproject.toml
-LICENSE
-README.md
-setup.py
+# ignore everything
+*
+# except 3 files
+!/src
+!/requirements.txt
+!/Dockerfile
 
