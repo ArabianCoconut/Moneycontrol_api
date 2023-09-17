@@ -24,7 +24,7 @@ class Api:
         """
         self.Data = {"NewsType": news_info, "Title": title_info,
                      "Link": link_info, "Date": date_info}
-        self.json_file = "static/data.json"
+        self.json_file = sc.StorageControl("data.pkl").json_path()
         self.html_parser = "html.parser"
         self.url = ["https://www.moneycontrol.com/news", "https://www.moneycontrol.com/news/business",
                     "https://www.moneycontrol.com/news/latest-news/"]

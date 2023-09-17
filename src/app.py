@@ -1,10 +1,11 @@
 # Author: Arabian Coconut
-# Last Modified: 06/07/2023
+# Last Modified: 17/09/2023
 import moneycontrol.moneycontrol_api as mc
 import moneycontrol.storage_control as sc
 from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
+sc_instance= sc.StorageControl("data.pkl")
 
 
 @app.route('/api/<news>', methods=['GET'])
@@ -27,8 +28,8 @@ def api(news):
         elif news == 'latest':
             return jsonify(mc.get_latest_news())
         elif news == 'list':
-            sc.StorageControl("data.pkl").convert_to_json()
-            return jsonify(open("Moneycontrol_api/src/static/data.json", 'r').read())
+            sc_instance.convert_to_json()
+            return jsonify(open(sc_instance.json_path(), 'r').read())
         elif news == 'status':
             return jsonify({"status": "200"})
     else:
