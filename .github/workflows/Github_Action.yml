@@ -4,7 +4,7 @@ name: Upload Python Package to Test PyPI and Main PyPI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ Local ]
 
 permissions:
   contents: read
