@@ -1,21 +1,28 @@
 
 # MoneyControl Api
-### Status of project: **Partially-Complete**
-#### Author: Arabian Coconut
+
+## Status of project: **Partially-Complete**
+
+### Author: Arabian Coconut
+
 #### Docker Version: 1.1.7
+
 #### Local Version: 1.1.3
 
 ---
+
 ## Description
 
-This is a python API for moneycontrol.com, which provides you with the news, latest news, and 
+This is a python API for moneycontrol.com, which provides you with the news, latest news, and
 business news from moneycontrol.com in JSON format for your server's integration.
 
-Notes: 
+Notes:
+
 * This API is not affiliated with moneycontrol.com in any way.
 * Master branch is for Docker deploy and Local branch is for local deploy.
 
 ## How to use api
+
 ```shell
 wget https://mc-api-j0rn.onrender.com/api/news 
 wget https://mc-api-j0rn.onrender.com/api/latest_news
@@ -23,6 +30,7 @@ wget https://mc-api-j0rn.onrender.com/api/business_news
 wget https://mc-api-j0rn.onrender.com/api/list
 wget https://mc-api-j0rn.onrender.com/api/status
  ```
+
 ### Installation for local implementation
 
 `pip install moneycontrol-api`
@@ -49,8 +57,11 @@ wget https://mc-api-j0rn.onrender.com/api/status
   "Date:": "August 05, 2023 05:08 PM"
 }
 ```
+
 ---
+
 ## Changelog
+
 * 1.1.7
   * Updated Home page for modern look.
 * 1.1.6
@@ -67,5 +78,7 @@ wget https://mc-api-j0rn.onrender.com/api/status
   * **Note**: Only Docker implementation is updated with this version for local implementation please use 1.1.3 from the master branch.
 
 ---
-## Buy me a Coffee :coffee:
+
+## Buy me a Coffee :coffee
+
 <a href="https://www.buymeacoffee.com/arabiancoconut" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
