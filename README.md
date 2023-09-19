@@ -1,8 +1,8 @@
 
 # MoneyControl Api
-### Status of project: **Complete**
+### Status of project: **Partially-Complete**
 #### Author: Arabian Coconut
-#### Docker Version: 1.1.6
+#### Docker Version: 1.1.7
 #### Local Version: 1.1.3
 
 ---
@@ -51,6 +51,8 @@ wget https://mc-api-j0rn.onrender.com/api/status
 ```
 ---
 ## Changelog
+* 1.1.7
+  * Updated Home page for modern look.
 * 1.1.6
   * Modified Storage handling for better performance.
   * Removed static folder from the project as its not required folder.
@@ -60,9 +62,9 @@ wget https://mc-api-j0rn.onrender.com/api/status
   * api_data.json is now deleted after 7 days of creation or updating.
   * Added new API for server status check.
 * 1.1.4
-    * Added LRU cache to reduce the load on the server
-    * Added JSON storage for viewing all requests made to the server via /api/list for online demo implementation.
-    * **Note**: Only Docker implementation is updated with this version for local implementation please use 1.1.3 from the master branch.
+  * Added LRU cache to reduce the load on the server
+  * Added JSON storage for viewing all requests made to the server via /api/list for online demo implementation.
+  * **Note**: Only Docker implementation is updated with this version for local implementation please use 1.1.3 from the master branch.
 
 ---
 ## Buy me a Coffee :coffee:
