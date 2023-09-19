@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  #page_footer {
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+  }
