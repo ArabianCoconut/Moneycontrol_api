@@ -2,7 +2,7 @@
 # Last Modified: 06/07/2023
 import moneycontrol.moneycontrol_api as mc
 import json
-from flask import Flask, request, jsonify, render_template, url_for
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
