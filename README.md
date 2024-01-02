@@ -5,7 +5,7 @@
 
 ### Author: Arabian Coconut
 
-#### Docker Version: 1.1.7
+#### Docker Version: 1.1.8
 
 #### Local Version: 1.1.3
 
@@ -62,6 +62,9 @@ wget https://mc-api-j0rn.onrender.com/api/status
 
 ## Changelog
 
+* 1.1.8
+  * Minor bug fixes and code cleanup.
+  * Performance improvements.
 * 1.1.7
   * Updated Home page for modern look.
 * 1.1.6
