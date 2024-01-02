@@ -8,26 +8,26 @@ class StorageControl:
         try:
             open(self.file_name, 'xb').close()
         except FileExistsError:
-            pass
-        
+            return None
     def json_path(self):
         return "moneycontrol/data.json"
-    
     def save(self, data):
-        with open(self.file_name, 'ab') as file:
-            pickle.dump(data, file)
-
+        existing_data = self.load()
+        if existing_data is None or not isinstance(existing_data, list):
+            existing_data = []
+        existing_data.append(data)
+        with open(self.file_name, 'wb') as file:
+            pickle.dump(existing_data, file)
     def load(self):
         if os.path.getsize(self.file_name) > 0:
-            return pickle.load(open(self.file_name, 'rb'))
+            with open(self.file_name, 'rb') as file:
+                return pickle.load(file)
         else:
-            pass
+            return None
     def write(self, data):
         with open(self.file_name, 'wb') as file:
             pickle.dump(data, file)
-
-
-    def convert_to_json(self):
+    def convert_to_json(self): #! This function not working
         data = []
         json_file_path = self.json_path()
         with open(self.file_name, 'rb') as file:
@@ -36,5 +36,6 @@ class StorageControl:
                     data.append(pickle.load(file))
                 except EOFError:
                     break
-        with open(json_file_path, 'w') as json_file:
+        with open(json_file_path, 'w',encoding='UTF-8') as json_file:
             json.dump(data, json_file, ensure_ascii=False, indent=4)
+            
