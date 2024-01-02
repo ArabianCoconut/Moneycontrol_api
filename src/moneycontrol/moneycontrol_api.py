@@ -124,6 +124,36 @@ def file_remove():
             time.sleep(604800)
 
 
+# def dict_storage(json_format: dict):
+#     """
+#     Stores the data in a JSON file, and removes the file if the size is greater than 1MB
+#     """
+#     threading.Thread(target=file_remove).start()
+
+#     new_entry = {
+#         "ID":str(uuid.uuid4()),
+#         "NewsType": json_format["NewsType"],
+#         "Title": json_format["Title"],
+#         "Link": json_format["Link"],
+#         "Date": json_format["Date"]
+#     }
+#     # Load the data into Pickle file
+#     sc_instance = sc.StorageControl("data.pkl")
+#     file_load = sc_instance.load()
+
+#     try:
+#         if file_load is None:
+#             sc_instance.save(new_entry)
+#         else:
+#             # Check if the title already exists in the loaded data
+#             if not any(d.get("Title") == json_format["Title"] for d in file_load):
+#                 sc_instance.save(new_entry)
+#             else:
+#                 print("Data already exists")
+#     except FileNotFoundError:
+
+#         sc_instance.write(new_entry)
+
 def dict_storage(json_format: dict):
     """
     Stores the data in a JSON file, and removes the file if the size is greater than 1MB
@@ -137,16 +167,17 @@ def dict_storage(json_format: dict):
         "Link": json_format["Link"],
         "Date": json_format["Date"]
     }
+    print(new_entry)
     # Load the data into Pickle file
     sc_instance = sc.StorageControl("data.pkl")
     file_load = sc_instance.load()
 
     try:
         if file_load is None:
-            sc_instance.save(new_entry)
-        elif file_load.get("Title") != json_format["Title"]:
-            sc_instance.save(new_entry)
-        else:
-            print("Data already exists")
+            sc_instance.write([new_entry])  # Write new_entry as a list to the file
+        elif not any(d['Title'] == json_format['Title'] for d in file_load if isinstance(d, dict)):
+            sc_instance.save([new_entry])  # Save new_entry as a list to the file
+        else:  
+            print("Diagnostics: Same Data exist")
     except FileNotFoundError:
-        sc_instance.write(new_entry)
+        sc_instance.write([new_entry])  
