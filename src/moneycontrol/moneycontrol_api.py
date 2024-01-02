@@ -21,12 +21,10 @@ class Api:
         """
         Initializes the constants
         """
-        self.Data = {"NewsType": news_info, "Title": title_info,
-                     "Link": link_info, "Date": date_info}
+        self.Data = {"NewsType": news_info, "Title": title_info,"Link": link_info, "Date": date_info}
         self.html_parser = "html.parser"
         self.json_file = "static/api_data.json"
-        self.url = ["https://www.moneycontrol.com/news", "https://www.moneycontrol.com/news/business",
-                    "https://www.moneycontrol.com/news/latest-news/"]
+        self.url = ["https://www.moneycontrol.com/news", "https://www.moneycontrol.com/news/business","https://www.moneycontrol.com/news/latest-news/"]
 
 
 @lru_cache(maxsize=16)
@@ -139,7 +137,7 @@ def dict_storage(json_format: dict):
     data = {}
 
     try:
-        with open(Api().json_file, 'r') as f:
+        with open(Api().json_file, 'r', encoding='utf-8') as f:
             data = dict(json.load(f))
     except (FileNotFoundError, json.decoder.JSONDecodeError):
         with open(Api().json_file, 'w', encoding='utf-8') as f:
