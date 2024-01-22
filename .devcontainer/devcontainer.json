@@ -1,0 +1,7 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/trunk-io/devcontainer-feature/trunk:1": {}
+  }
+}
