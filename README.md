@@ -24,9 +24,9 @@ Notes:
 ## How to use api
 
 ```shell
-wget https://mc-api-j0rn.onrender.com/api/news 
-wget https://mc-api-j0rn.onrender.com/api/latest_news
-wget https://mc-api-j0rn.onrender.com/api/business_news
+wget https://mc-api-j0rn.onrender.com/api/news
+wget https://mc-api-j0rn.onrender.com/api/latest
+wget https://mc-api-j0rn.onrender.com/api/business
 wget https://mc-api-j0rn.onrender.com/api/list
 wget https://mc-api-j0rn.onrender.com/api/status
  ```
