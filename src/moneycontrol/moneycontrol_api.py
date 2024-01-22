@@ -4,11 +4,14 @@
 import os
 import threading
 import time
-import moneycontrol.storage_control as sc
 import uuid
+from functools import lru_cache
+
 import requests
 from bs4 import BeautifulSoup
-from functools import lru_cache
+
+import moneycontrol.storage_control as sc
+
 
 # Constants
 class Api:
@@ -20,11 +23,20 @@ class Api:
         """
         Initializes the constants
         """
-        self.Data = {"NewsType": news_info, "Title": title_info,"Link": link_info, "Date": date_info}
+        self.Data = {
+            "NewsType": news_info,
+            "Title": title_info,
+            "Link": link_info,
+            "Date": date_info,
+        }
         self.json_file = sc.StorageControl("data.pkl").json_path()
         self.html_parser = "html.parser"
-        self.url = ["https://www.moneycontrol.com/news", "https://www.moneycontrol.com/news/business",
-        "https://www.moneycontrol.com/news/latest-news/"]
+        self.url = [
+            "https://www.moneycontrol.com/news",
+            "https://www.moneycontrol.com/news/business",
+            "https://www.moneycontrol.com/news/latest-news/",
+        ]
+
 
 @lru_cache(maxsize=16)
 def get_news():
@@ -45,9 +57,12 @@ def get_news():
     for i in soup_process:
         title_info = i.find("a").get("title")
         link_info = i.find("a").get("href")
-        json_output.Data.update({"NewsType": "News", "Title": title_info, "Link": link_info})
+        json_output.Data.update(
+            {"NewsType": "News", "Title": title_info, "Link": link_info}
+        )
         dict_storage(json_output.Data)
         return json_output.Data
+
 
 @lru_cache(maxsize=16)
 def get_business_news():
@@ -69,9 +84,17 @@ def get_business_news():
     title_info = news_list.find("h2").find("a").get("title")
     link_info = news_list.find("h2").find("a").get("href")
     date_info = news_list.find("span", {"class": "list_dt"})
-    json_output.Data.update({"NewsType": "Business News", "Title": title_info, "Link": link_info, "Date": date_info})
+    json_output.Data.update(
+        {
+            "NewsType": "Business News",
+            "Title": title_info,
+            "Link": link_info,
+            "Date": date_info,
+        }
+    )
     dict_storage(json_output.Data)
     return json_output.Data
+
 
 @lru_cache(maxsize=16)
 def get_latest_news():
@@ -95,9 +118,17 @@ def get_latest_news():
         title_info = h3_tag.find("a").get("title")
         link_info = h3_tag.find("a").get("href")
         date_info = p_tag.text
-        json_output.Data.update({"NewsType": "Latest News", "Title": title_info, "Link": link_info, "Date": date_info})
+        json_output.Data.update(
+            {
+                "NewsType": "Latest News",
+                "Title": title_info,
+                "Link": link_info,
+                "Date": date_info,
+            }
+        )
         dict_storage(json_output.Data)
         return json_output.Data
+
 
 def file_remove():
     """
@@ -119,6 +150,7 @@ def file_remove():
         else:
             time.sleep(604800)
 
+
 def dict_storage(json_format: dict):
     """
     Stores the data in a JSON file, and removes the file if the size is greater than 1MB
@@ -126,11 +158,11 @@ def dict_storage(json_format: dict):
     threading.Thread(target=file_remove).start()
 
     new_entry = {
-        "ID":str(uuid.uuid4()),
+        "ID": str(uuid.uuid4()),
         "NewsType": json_format["NewsType"],
         "Title": json_format["Title"],
         "Link": json_format["Link"],
-        "Date": json_format["Date"]
+        "Date": json_format["Date"],
     }
     # Load the data into Pickle file
     sc_instance = sc.StorageControl("data.pkl")
@@ -139,10 +171,14 @@ def dict_storage(json_format: dict):
     try:
         if file_load is None:
             sc_instance.write([new_entry])  # Write new_entry as a list to the file
-        elif not any(d['Title'] == json_format['Title'] for d in file_load if isinstance(d, dict)):
+        elif not any(
+            d["Title"] == json_format["Title"] for d in file_load if isinstance(d, dict)
+        ):
             sc_instance.save([new_entry])  # Save new_entry as a list to the file
         else:
             print("Diagnostics: Same Data exist")
     except FileNotFoundError:
         sc_instance.write([new_entry])
-        
+
+
+get_business_news()
