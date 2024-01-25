@@ -1,8 +1,7 @@
 # Author: Arabian Coconut
 # Last Modified: 02/01/2024 (DD/MM/YYYY)
 # Description: This file contains the API for getting the news from the moneycontrol website.
-import os
-import time
+import datetime
 from functools import lru_cache
 
 import requests
@@ -27,7 +26,7 @@ class Api:
             "Link": link_info,
             "Date": date_info,
         }
-        self.upload= sc.db_connection()
+        self.upload = sc.db_connection()
         self.html_parser = "html.parser"
         self.url = [
             "https://www.moneycontrol.com/news",
@@ -55,11 +54,22 @@ def get_news():
     for i in soup_process:
         title_info = i.find("a").get("title")
         link_info = i.find("a").get("href")
+        date_info = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         json_output.Data.update(
-            {"NewsType": "News", "Title": title_info, "Link": link_info}
+            {
+                "NewsType": "News",
+                "Title": title_info,
+                "Link": link_info,
+                "Server_Time": date_info,
+            }
         )
         json_output.upload.insert_one(json_output.Data)
-        return json_output.Data
+        # if not json_output.upload.find_one({"Tile": json_output.Data["Title"]}):
+        #     json_output.upload.insert_one(json_output.Data)
+        #     return json_output.Data
+        # else:
+        #     return json_output.Data
+    return json_output.Data
 
 
 @lru_cache(maxsize=16)
@@ -90,7 +100,8 @@ def get_business_news():
             "Date": date_info,
         }
     )
-    dict_storage(json_output.Data)
+    if not json_output.upload.find_one({"Tile": json_output.Data["Title"]}):
+        json_output.upload.insert_one(json_output.Data)
     return json_output.Data
 
 
@@ -124,52 +135,8 @@ def get_latest_news():
                 "Date": date_info,
             }
         )
-        dict_storage(json_output.Data)
-        return json_output.Data
+    if not json_output.upload.find_one({"Tile": json_output.Data["Title"]}):
+        json_output.upload.insert_one(json_output.Data)
+    return json_output.Data
 
-
-def file_remove():
-    """
-    # check file size is greater than 1MB
-    # if greater than 1MB then delete the file
-    # else wait for 7 days
-    """
-    while True:
-        if os.path.exists(Api().json_file):
-            file_size = os.path.getsize(Api().json_file)
-            if file_size > 1000000:
-                os.remove(Api().json_file)
-                print("File removed successfully")
-                dict_storage(Api().Data)
-                time.sleep(604800)
-            else:
-                print("File size is less than 1MB, check after 7 days")
-                time.sleep(604800)
-        else:
-            time.sleep(604800)
-
-
-def dict_storage(json_format: dict):
-    """
-    Stores the data in a JSON file, and removes the file if the size is greater than 1MB
-    """
-    sc.db_connection().insert_one(
-        {
-            "NewsType": json_format["NewsType"],
-            "Title": json_format["Title"],
-            "Link": json_format["Link"],
-            "Date": json_format["Date"],
-        }
-    )
-
-    # new_entry = {
-    #     "ID": str(uuid.uuid4()),
-    #     "NewsType": json_format["NewsType"],
-    #     "Title": json_format["Title"],
-    #     "Link": json_format["Link"],
-    #     "Date": json_format["Date"],
-    # }
-    
-
-
-get_news()
+# get_news()

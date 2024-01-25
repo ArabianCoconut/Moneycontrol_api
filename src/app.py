@@ -4,9 +4,7 @@ import moneycontrol.moneycontrol_api as mc
 import moneycontrol.storage_control as sc
 from flask import Flask, request,jsonify, render_template
 
-
 app = Flask(__name__)
-sc_instance= sc.StorageControl("data.pkl")
 
 @app.route('/api/<news>', methods=['GET'])
 def api(news):
@@ -29,8 +27,9 @@ def api(news):
                     return jsonify(mc.get_business_news())
                 case 'latest':
                     return jsonify(mc.get_latest_news())
-                case 'list':
-                    return jsonify(sc_instance.load())
+                case 'list': #! This is not working
+                        return jsonify(list(data for data in sc.db_connection().find()))
+                    # return jsonify(sc_instance.load())
                 case 'status':
                     return jsonify({"status": "200"})
         case _:
@@ -40,3 +39,5 @@ def api(news):
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
+
+app.run(host='localhost', port=8080, debug=True)
