@@ -1,7 +1,15 @@
-import os
+import pymongo
 import pickle
+import os
+from dotenv import load_dotenv,find_dotenv
+from os import environ as env
 
+load_dotenv(find_dotenv())
+DB_CONNECTION= env.get("DB_CONNECTION")+env.get("DB_CONNECTION_VARIABLES")
+DB_NAME = env.get("DB_NAME")
+DB_COLLECTION = env.get("DB_COLLECTION")
 
+# @DeprecationWarning("This class is deprecated, use db_connection instead")
 class StorageControl:
     def __init__(self, file_name):
         self.file_name = "moneycontrol/" + file_name
@@ -33,3 +41,16 @@ class StorageControl:
     def write(self, data):
         with open(self.file_name, "wb") as file:
             pickle.dump(data, file)
+
+def db_connection():
+    try:
+        client = pymongo.MongoClient(DB_CONNECTION)
+        print(client)
+        db = client.get_database(DB_NAME).get_collection(DB_COLLECTION)
+        db.insert_one({"test":"test"})
+        return db
+    except Exception as e:
+        print("Error in connecting to database open issue on GitHub. Error:",e)
+        return None
+
+db_connection()

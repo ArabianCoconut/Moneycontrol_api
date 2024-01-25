@@ -2,9 +2,7 @@
 # Last Modified: 02/01/2024 (DD/MM/YYYY)
 # Description: This file contains the API for getting the news from the moneycontrol website.
 import os
-import threading
 import time
-import uuid
 from functools import lru_cache
 
 import requests
@@ -29,7 +27,7 @@ class Api:
             "Link": link_info,
             "Date": date_info,
         }
-        self.json_file = sc.StorageControl("data.pkl").json_path()
+        self.upload= sc.db_connection()
         self.html_parser = "html.parser"
         self.url = [
             "https://www.moneycontrol.com/news",
@@ -60,7 +58,7 @@ def get_news():
         json_output.Data.update(
             {"NewsType": "News", "Title": title_info, "Link": link_info}
         )
-        dict_storage(json_output.Data)
+        json_output.upload.insert_one(json_output.Data)
         return json_output.Data
 
 
@@ -155,30 +153,23 @@ def dict_storage(json_format: dict):
     """
     Stores the data in a JSON file, and removes the file if the size is greater than 1MB
     """
-    threading.Thread(target=file_remove).start()
+    sc.db_connection().insert_one(
+        {
+            "NewsType": json_format["NewsType"],
+            "Title": json_format["Title"],
+            "Link": json_format["Link"],
+            "Date": json_format["Date"],
+        }
+    )
 
-    new_entry = {
-        "ID": str(uuid.uuid4()),
-        "NewsType": json_format["NewsType"],
-        "Title": json_format["Title"],
-        "Link": json_format["Link"],
-        "Date": json_format["Date"],
-    }
-    # Load the data into Pickle file
-    sc_instance = sc.StorageControl("data.pkl")
-    file_load = sc_instance.load()
-
-    try:
-        if file_load is None:
-            sc_instance.write([new_entry])  # Write new_entry as a list to the file
-        elif not any(
-            d["Title"] == json_format["Title"] for d in file_load if isinstance(d, dict)
-        ):
-            sc_instance.save([new_entry])  # Save new_entry as a list to the file
-        else:
-            print("Diagnostics: Same Data exist")
-    except FileNotFoundError:
-        sc_instance.write([new_entry])
+    # new_entry = {
+    #     "ID": str(uuid.uuid4()),
+    #     "NewsType": json_format["NewsType"],
+    #     "Title": json_format["Title"],
+    #     "Link": json_format["Link"],
+    #     "Date": json_format["Date"],
+    # }
+    
 
 
-get_business_news()
+get_news()
