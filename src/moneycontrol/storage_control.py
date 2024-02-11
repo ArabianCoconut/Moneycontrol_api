@@ -1,3 +1,4 @@
+import json
 import pymongo
 from dotenv import load_dotenv,find_dotenv
 from os import environ as env
@@ -8,11 +9,14 @@ def db_connection():
 
     Returns:
     db (object): The database object
-    """
-    load_dotenv(find_dotenv())
+    """   
+    # Reloads the environment variables
+    load_dotenv(dotenv_path=find_dotenv(),override=True,verbose=True)
+
     DB_NAME = env.get("DB_NAME")
     DB_COLLECTION = env.get("DB_COLLECTION")
-    URL_BUILD= env.get("DB_LOGIN")+env.get("DB_URL")
+    URL_BUILD= env.get("DB_LOGIN")
+
     try:
         client = pymongo.MongoClient(URL_BUILD)
         db = client.get_database(DB_NAME).get_collection(DB_COLLECTION)
@@ -22,4 +26,7 @@ def db_connection():
         print("Error in connecting to database open issue on GitHub. Error:",e)
         return None
 
-# db_connection()
+# Working Example of Json Data.
+data = list(db_connection().find())
+json_data = json.dumps(data, indent=4, default=str)
+print(json_data)
