@@ -32,8 +32,18 @@ def dump_all_data_to_json():
     """
     Dumps all the data from the database to a JSON format
     """
-    json_data = json.dumps(list(db_connection().find()), indent=2, default=str)
-    return json_data
+    try:
+        json_data = json.dumps(list(db_connection().find()), indent=2, default=str)
+        if json_data == "[]":
+            return json.dumps(
+        {
+            "status": "No data found in the database.",
+            "suggestion": "Please insert some data into the database using the /api/news endpoint."
+            }, indent=2, default=str)
+        else:
+            return json_data
+    except pymongo.errors as e:
+        return ("Error:",e)
 
 
 def insert_data_to_db(data,filters=None):
