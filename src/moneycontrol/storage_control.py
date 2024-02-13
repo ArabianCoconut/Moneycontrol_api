@@ -1,5 +1,6 @@
 import json
 import pymongo
+import pymongo.errors
 from dotenv import load_dotenv,find_dotenv
 from os import environ as env
 
@@ -11,7 +12,7 @@ def db_connection():
     db (object): The database object
     """   
     # Reloads the environment variables
-    load_dotenv(dotenv_path=find_dotenv(),override=True,verbose=True)
+    load_dotenv(dotenv_path=find_dotenv(),override=True)
 
     DB_NAME = env.get("DB_NAME")
     DB_COLLECTION = env.get("DB_COLLECTION")
@@ -27,6 +28,24 @@ def db_connection():
         return None
 
 # Working Example of Json Data.
-data = list(db_connection().find())
-json_data = json.dumps(data, indent=4, default=str)
-print(json_data)
+def dump_all_data_to_json():
+    """
+    Dumps all the data from the database to a JSON format
+    """
+    json_data = json.dumps(list(db_connection().find()), indent=2, default=str)
+    return json_data
+
+
+def insert_data_to_db(data,filters=None):
+    """
+    Inserts the given data into the database and also returns the inserted data
+
+    Parameters:
+    data (dict): The data to be inserted into the database
+    """
+    try:
+        db_connection().insert_one(data)
+        return json.dumps(db_connection().find_one(filters), indent=2, default=str)
+    except pymongo.errors.DuplicateKeyError as e:
+        return ("Duplicate Key Error Occurred. Skipping the insertion.",e)
+

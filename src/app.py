@@ -22,14 +22,13 @@ def api(news):
         case 'GET':
             match news:
                 case 'news':
-                    return jsonify(mc.get_news())
+                    return mc.get_news()
                 case 'business':
-                    return jsonify(mc.get_business_news())
+                    return mc.get_business_news()
                 case 'latest':
-                    return jsonify(mc.get_latest_news())
-                case 'list': #! This is not working
-                        return jsonify(list(data for data in sc.db_connection().find()))
-                    # return jsonify(sc_instance.load())
+                    return mc.get_latest_news()
+                case 'list': 
+                        return sc.dump_all_data_to_json()
                 case 'status':
                     return jsonify({"status": "200"})
         case _:
@@ -39,5 +38,3 @@ def api(news):
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
-
-app.run(host='localhost', port=8080, debug=True)

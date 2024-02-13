@@ -3,7 +3,6 @@
 # Description: This file contains the API for getting the news from the moneycontrol website.
 import datetime
 from functools import lru_cache
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -25,6 +24,7 @@ class Api:
             "Title": title_info,
             "Link": link_info,
             "Date": date_info,
+            "API_CALLED": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         }
         self.upload = sc.db_connection()
         self.html_parser = "html.parser"
@@ -54,22 +54,15 @@ def get_news():
     for i in soup_process:
         title_info = i.find("a").get("title")
         link_info = i.find("a").get("href")
-        date_info = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         json_output.Data.update(
             {
                 "NewsType": "News",
                 "Title": title_info,
                 "Link": link_info,
-                "Server_Time": date_info,
             }
         )
-        json_output.upload.insert_one(json_output.Data)
-        # if not json_output.upload.find_one({"Tile": json_output.Data["Title"]}):
-        #     json_output.upload.insert_one(json_output.Data)
-        #     return json_output.Data
-        # else:
-        #     return json_output.Data
-    return json_output.Data
+        return sc.insert_data_to_db(json_output.Data,filters={"NewsType": "News"})
+
 
 
 @lru_cache(maxsize=16)
@@ -100,9 +93,7 @@ def get_business_news():
             "Date": date_info,
         }
     )
-    if not json_output.upload.find_one({"Tile": json_output.Data["Title"]}):
-        json_output.upload.insert_one(json_output.Data)
-    return json_output.Data
+    return sc.insert_data_to_db(json_output.Data,filters={"NewsType": "Business News"})
 
 
 @lru_cache(maxsize=16)
@@ -135,8 +126,4 @@ def get_latest_news():
                 "Date": date_info,
             }
         )
-    if not json_output.upload.find_one({"Tile": json_output.Data["Title"]}):
-        json_output.upload.insert_one(json_output.Data)
-    return json_output.Data
-
-# get_news()
+        return sc.insert_data_to_db(json_output.Data,filters={"NewsType": "Latest News"})
