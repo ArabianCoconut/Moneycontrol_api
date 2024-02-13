@@ -1,35 +1,51 @@
-import os
-import pickle
+import json
+import pymongo
+import pymongo.errors
+from dotenv import load_dotenv,find_dotenv
+from os import environ as env
+
+def db_connection():
+    """Summary
+    Connects to the database and returns the database object
+
+    Returns:
+    db (object): The database object
+    """   
+    # Reloads the environment variables
+    load_dotenv(dotenv_path=find_dotenv(),override=True)
+
+    DB_NAME = env.get("DB_NAME")
+    DB_COLLECTION = env.get("DB_COLLECTION")
+    URL_BUILD= env.get("DB_LOGIN")
+
+    try:
+        client = pymongo.MongoClient(URL_BUILD)
+        db = client.get_database(DB_NAME).get_collection(DB_COLLECTION)
+        print("Connected to database")
+        return db
+    except Exception as e:
+        print("Error in connecting to database open issue on GitHub. Error:",e)
+        return None
+
+# Working Example of Json Data.
+def dump_all_data_to_json():
+    """
+    Dumps all the data from the database to a JSON format
+    """
+    json_data = json.dumps(list(db_connection().find()), indent=2, default=str)
+    return json_data
 
 
-class StorageControl:
-    def __init__(self, file_name):
-        self.file_name = "moneycontrol/" + file_name
-        try:
-            open(self.file_name, "xb").close()
-        except FileExistsError:
-            return None
-        except FileNotFoundError:
-            open(self.file_name, "wb").close()
+def insert_data_to_db(data,filters=None):
+    """
+    Inserts the given data into the database and also returns the inserted data
 
-    def json_path(self):
-        return "moneycontrol/data.json"
+    Parameters:
+    data (dict): The data to be inserted into the database
+    """
+    try:
+        db_connection().insert_one(data)
+        return json.dumps(db_connection().find_one(filters), indent=2, default=str)
+    except pymongo.errors.DuplicateKeyError as e:
+        return ("Duplicate Key Error Occurred. Skipping the insertion.",e)
 
-    def save(self, data):
-        existing_data = self.load()
-        if existing_data is None or not isinstance(existing_data, list):
-            existing_data = []
-        existing_data.append(data)
-        with open(self.file_name, "wb") as file:
-            pickle.dump(existing_data, file)
-
-    def load(self):
-        if os.path.getsize(self.file_name) > 0:
-            with open(self.file_name, "rb") as file:
-                return pickle.load(file)
-        else:
-            return None
-
-    def write(self, data):
-        with open(self.file_name, "wb") as file:
-            pickle.dump(data, file)
