@@ -38,5 +38,3 @@ def api(news):
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
-
-app.run(debug=True, port=5000, host='localhost')
