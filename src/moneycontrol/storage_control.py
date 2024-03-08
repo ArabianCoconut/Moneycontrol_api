@@ -16,10 +16,10 @@ def db_connection():
 
     DB_NAME = env.get("DB_NAME")
     DB_COLLECTION = env.get("DB_COLLECTION")
-    URL_BUILD= env.get("DB_LOGIN")
+    DB_LOGIN= env.get("DB_LOGIN")
 
     try:
-        client = pymongo.MongoClient(URL_BUILD)
+        client = pymongo.MongoClient(DB_LOGIN)
         db = client.get_database(DB_NAME).get_collection(DB_COLLECTION)
         print("Connected to database")
         return db
@@ -54,7 +54,8 @@ def insert_data_to_db(data,filters=None):
     data (dict): The data to be inserted into the database
     """
     try:
-        db_connection().insert_one(data)
+        # insert incoming list of data into the database
+        db_connection().insert_many(data)
         return json.dumps(db_connection().find_one(filters), indent=2, default=str)
     except pymongo.errors.DuplicateKeyError as e:
         return ("Duplicate Key Error Occurred. Skipping the insertion.",e)
