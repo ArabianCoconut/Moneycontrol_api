@@ -140,3 +140,4 @@ Dev_notes.txt
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/vcs.xml
+src/moneycontrol/moneycontrol_api_copy.py
