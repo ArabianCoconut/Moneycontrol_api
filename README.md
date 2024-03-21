@@ -29,6 +29,7 @@ wget https://mc-api-j0rn.onrender.com/api/latest
 wget https://mc-api-j0rn.onrender.com/api/business
 wget https://mc-api-j0rn.onrender.com/api/list
 wget https://mc-api-j0rn.onrender.com/api/status
+wget https://mc-api-j0rn.onrender.com/price/TCS
  ```
 
 ### Installation for local implementation
@@ -47,6 +48,8 @@ wget https://mc-api-j0rn.onrender.com/api/status
 
 * get_business_news
 
+* get_basic_price
+
 ### Output format
 
 ``` json
@@ -61,7 +64,9 @@ wget https://mc-api-j0rn.onrender.com/api/status
 ---
 
 ## Changelog
-
+* 1.2.0
+  * Stock prices implemented(rudermentry). More elaborate price data will be supported.
+  * **Limitation**: Currently due to the structuring of URLs of moneycontrol. Using the API may throw an error on /price/ endpoint if thats the case please raise an issue for me to correct the "symbol". Later on the users themselves can contribute to correct "symbols" moneycontrol uses different "shorthands" hence the limitation.
 * 1.1.9
   * Integrated MongoDB for future stock metric implementation.
   * Removed previous Storage handling methods in favour of MongoDB.

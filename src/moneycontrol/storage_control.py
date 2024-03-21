@@ -1,4 +1,5 @@
 import json
+import logging
 import pymongo
 import pymongo.errors
 from dotenv import load_dotenv,find_dotenv
@@ -16,46 +17,57 @@ def db_connection():
 
     DB_NAME = env.get("DB_NAME")
     DB_COLLECTION = env.get("DB_COLLECTION")
-    URL_BUILD= env.get("DB_LOGIN")
+    DB_LOGIN= env.get("DB_LOGIN")
 
     try:
-        client = pymongo.MongoClient(URL_BUILD)
+        client = pymongo.MongoClient(DB_LOGIN)
         db = client.get_database(DB_NAME).get_collection(DB_COLLECTION)
-        print("Connected to database")
         return db
     except Exception as e:
         print("Error in connecting to database open issue on GitHub. Error:",e)
         return None
 
 # Working Example of Json Data.
-def dump_all_data_to_json():
+def dump_all_data_to_json(filters=None):
     """
     Dumps all the data from the database to a JSON format
     """
     try:
-        json_data = json.dumps(list(db_connection().find()), indent=2, default=str)
+        json_data = json.dumps(list(db_connection().find(filters)), indent=2, default=str)
         if json_data == "[]":
             return json.dumps(
         {
             "status": "No data found in the database.",
             "suggestion": "Please insert some data into the database using the /api/news endpoint."
             }, indent=2, default=str)
+        elif filters is None:
+            return json.dumps(list(db_connection().find()), indent=2, default=str)
         else:
             return json_data
     except pymongo.errors as e:
         return ("Error:",e)
 
 
-def insert_data_to_db(data,filters=None):
+def insert_data_to_db(data, filters=None):
     """
     Inserts the given data into the database and also returns the inserted data
 
     Parameters:
     data (dict): The data to be inserted into the database
+    filters (dict): Optional filters to apply when finding the inserted data
     """
     try:
-        db_connection().insert_one(data)
-        return json.dumps(db_connection().find_one(filters), indent=2, default=str)
-    except pymongo.errors.DuplicateKeyError as e:
-        return ("Duplicate Key Error Occurred. Skipping the insertion.",e)
+        db_connection().insert_many(data)
+        logging.info("Data Inserted Successfully")
+        return dump_all_data_to_json(filters)
+    except pymongo.errors.BulkWriteError as e:
+        str(e).strip("[]")
+        logging.warning(f"Data already exists in the database. Error: {str(e)}")
+        return dump_all_data_to_json(filters)
 
+
+
+
+# Reference Code not to be deleted
+db_connection().delete_many({})
+    # * db_connection().create_index([("Link", pymongo.ASCENDING)], unique=True)
