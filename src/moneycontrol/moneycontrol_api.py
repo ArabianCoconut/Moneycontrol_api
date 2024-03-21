@@ -1,5 +1,5 @@
 # Author: Arabian Coconut
-# Last Modified: 02/01/2024 (DD/MM/YYYY)
+# Last Modified: 21/03/2024 (DD/MM/YYYY)
 # Description: This file contains the API for getting the news from the moneycontrol website.
 import datetime
 from functools import lru_cache
