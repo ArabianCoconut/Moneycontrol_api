@@ -1,7 +1,6 @@
 # Author: Arabian Coconut
 # Last Modified: 02/01/2024 (DD/MM/YYYY)
-import requests
-import moneycontrol.moneycontrol_api_copy as mc
+import moneycontrol.moneycontrol_api_backup as mc
 import moneycontrol.storage_control as sc
 from flask import Flask, request,jsonify, render_template
 
