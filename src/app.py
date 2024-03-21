@@ -1,6 +1,7 @@
 # Author: Arabian Coconut
 # Last Modified: 02/01/2024 (DD/MM/YYYY)
-import moneycontrol.moneycontrol_api_backup as mc
+import requests
+import moneycontrol.moneycontrol_api as mc
 import moneycontrol.storage_control as sc
 from flask import Flask, request,jsonify, render_template
 
@@ -48,7 +49,7 @@ def price_worker(stock):
     match request.method:
         case 'GET':
             try:
-                return jsonify(mc.get_basic_price(stock))
+                return jsonify(mc.get_basic_price(stock.upper()))
             except requests.exceptions.JSONDecodeError:
                 return jsonify({"Error": "Your seeing this because certain symbols are not supported due to complexities raise an issue on the github page.",
                                 "Github": "https://github.com/ArabianCoconut/Moneycontrol_api"
@@ -60,4 +61,4 @@ def price_worker(stock):
 def index():
     return render_template('index.html')
 
-# app.run(debug=True, port=5000, host='localhost')
+app.run(debug=True, port=5000, host='localhost')
