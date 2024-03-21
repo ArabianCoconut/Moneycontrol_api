@@ -61,4 +61,4 @@ def price_worker(stock):
 def index():
     return render_template('index.html')
 
-app.run(debug=True, port=5000, host='localhost')
+# app.run(debug=True, port=5000, host='localhost')
