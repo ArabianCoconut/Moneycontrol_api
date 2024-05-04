@@ -27,7 +27,7 @@ class Api:
             "https://www.moneycontrol.com/news/latest-news/",
         ]
 
-def get_business_news():  #! Problem with Webscraper
+def get_business_news():  #* CODE FIXED?
     """
     Gets the news from the given URL and returns a JSON object containing the title, link,
     and date of the news.
