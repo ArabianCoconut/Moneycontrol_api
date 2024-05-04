@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from dotenv import find_dotenv, load_dotenv
 
-import storage_control as sc
+import moneycontrol.storage_control as sc
 
 
 # Constants
@@ -84,21 +84,23 @@ def get_business_news():  #! Problem with Webscraper
     news_list = list(map(lambda x: "newslist-" + str(x), range(20)))
 
     i = 0
-    while i < len(news_list)-1:
+    while i < len(news_list) - 1:
         process = soup.find("li", {"class": "clearfix", "id": news_list[i]})
         title_info = process.find("h2").find("a").get("title")
         link_info = process.find("h2").find("a").get("href")
         date_info = process.find("span", {"class": "list_dt"})
         json_output.Data.update(
             {
-            "NewsType": "Business News",
-            "Title": title_info,
-            "Link": link_info,
-            "Date": date_info,
+                "NewsType": "Business News",
+                "Title": title_info,
+                "Link": link_info,
+                "Date": date_info,
             }
         )
         i += 1
-        return sc.insert_data_to_db(json_output.Data, filters={"NewsType": "Business News"})
+        return sc.insert_data_to_db(
+            json_output.Data, filters={"NewsType": "Business News"}
+        )
 
 
 @lru_cache(maxsize=16)
