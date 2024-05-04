@@ -3,13 +3,13 @@
 # Description: This file contains the API for getting the news from the moneycontrol website.
 import datetime
 from functools import lru_cache
+from os import environ as env
 
 import requests
-from dotenv import load_dotenv,find_dotenv
-from os import environ as env
 from bs4 import BeautifulSoup
+from dotenv import find_dotenv, load_dotenv
 
-import moneycontrol.storage_control as sc
+import storage_control as sc
 
 
 # Constants
@@ -54,7 +54,6 @@ def get_news():
     soup_process = soup.find_all("h3", {"class": "related_des"})
     json_output = Api()
 
-    processed_data = []
     for i in soup_process:
         title_info = i.find("a").get("title")
         link_info = i.find("a").get("href")
@@ -65,12 +64,11 @@ def get_news():
                 "Link": link_info,
             }
         )
-        return sc.insert_data_to_db(json_output.Data,filters={"NewsType": "News"})
-
+        return sc.insert_data_to_db(json_output.Data, filters={"NewsType": "News"})
 
 
 @lru_cache(maxsize=16)
-def get_business_news(): #! Problem with Webscraper
+def get_business_news():  #! Problem with Webscraper
     """
     Gets the news from the given URL and returns a JSON object containing the title, link,
     and date of the news.
@@ -83,22 +81,24 @@ def get_business_news(): #! Problem with Webscraper
     """
     json_output = Api()
     soup = BeautifulSoup(requests.get(Api().url[1], timeout=60).text, Api().html_parser)
-    processed_data = []
     news_list = list(map(lambda x: "newslist-" + str(x), range(20)))
-    for i in range(20):
+
+    i = 0
+    while i < len(news_list)-1:
         process = soup.find("li", {"class": "clearfix", "id": news_list[i]})
-    title_info = process.find("h2").find("a").get("title")
-    link_info = process.find("h2").find("a").get("href")
-    date_info = process.find("span", {"class": "list_dt"})
-    json_output.Data.update(
-        {
+        title_info = process.find("h2").find("a").get("title")
+        link_info = process.find("h2").find("a").get("href")
+        date_info = process.find("span", {"class": "list_dt"})
+        json_output.Data.update(
+            {
             "NewsType": "Business News",
             "Title": title_info,
             "Link": link_info,
             "Date": date_info,
-        }
-    )
-    return sc.insert_data_to_db(json_output.Data,filters={"NewsType": "Business News"})
+            }
+        )
+        i += 1
+        return sc.insert_data_to_db(json_output.Data, filters={"NewsType": "Business News"})
 
 
 @lru_cache(maxsize=16)
@@ -135,16 +135,18 @@ def get_latest_news():
         processed_data.append(json_output.Data.copy())
     return sc.insert_data_to_db(processed_data, filters={"NewsType": "Latest News"})
 
+
 def get_basic_price(symbol):
-    load_dotenv(dotenv_path=find_dotenv(),override=True)
+    load_dotenv(dotenv_path=find_dotenv(), override=True)
     HIDDEN_URL = env.get("HIDDEN_URL")
-    r = requests.get(f"{HIDDEN_URL}scIdList={symbol}&scId={symbol}", 
-                     timeout=60,
-                     headers={
-                         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
-                         "Connection": "keep-alive",
-                         "Accept": "*/*",
-                         "Accept-Encoding": "gzip, deflate, br",
-                     }
-                    )
+    r = requests.get(
+        f"{HIDDEN_URL}scIdList={symbol}&scId={symbol}",
+        timeout=60,
+        headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+            "Connection": "keep-alive",
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+        },
+    )
     return r.json()
