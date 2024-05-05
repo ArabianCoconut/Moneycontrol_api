@@ -1,7 +1,6 @@
 import json
 import logging
-import pymongo
-import pymongo.errors
+from pymongo import MongoClient, errors
 from dotenv import load_dotenv,find_dotenv
 from os import environ as env
 
@@ -20,7 +19,7 @@ def db_connection():
     DB_LOGIN= env.get("DB_LOGIN")
 
     try:
-        client = pymongo.MongoClient(DB_LOGIN)
+        client = MongoClient(DB_LOGIN)
         db = client.get_database(DB_NAME).get_collection(DB_COLLECTION)
         return db
     except Exception as e:
@@ -44,7 +43,7 @@ def dump_all_data_to_json(filters=None):
             return json.dumps(list(db_connection().find()), indent=2, default=str)
         else:
             return json_data
-    except pymongo.errors as e:
+    except errors as e:
         return ("Error:",e)
 
 
@@ -57,17 +56,28 @@ def insert_data_to_db(data, filters=None):
     filters (dict): Optional filters to apply when finding the inserted data
     """
     try:
-        db_connection().insert_many(data)
+        # db_connection().insert_one(data)
+        db_connection().insert_many(documents=data)
         logging.info("Data Inserted Successfully")
         return dump_all_data_to_json(filters)
-    except pymongo.errors.BulkWriteError as e:
+    except errors.BulkWriteError as e:
         str(e).strip("[]")
         logging.warning(f"Data already exists in the database. Error: {str(e)}")
         return dump_all_data_to_json(filters)
+    except errors.DuplicateKeyError as e:
+        logging.warning(f"Data already exists in the database. Error: {str(e)}")
+        return dump_all_data_to_json(filters)
+    except errors as e:
+        logging.error(f"Error in inserting data into the database. Error: {str(e)}")
+        return {"status": "Error in inserting data into the database. Please check the logs for more information."}
+    except Exception as e:
+        logging.error(f"Error in inserting data into the database. Error: {str(e)}")
+        return {"status": "Error in inserting data into the database. Please check the logs for more information."}
 
 
 
 
 # Reference Code not to be deleted
-db_connection().delete_many({})
-    # * db_connection().create_index([("Link", pymongo.ASCENDING)], unique=True)
+# db_connection().delete_many({})
+# db_connection().create_index([("Title", pymongo.ASCENDING)], unique=True)
+#db_connection().drop_index("")

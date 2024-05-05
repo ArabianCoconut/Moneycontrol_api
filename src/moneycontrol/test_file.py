@@ -1,22 +1,22 @@
-import requests
 import datetime
-from bs4 import BeautifulSoup
+import requests
 import storage_control as sc
+from bs4 import BeautifulSoup
 
 class Api:
     """
     A class used to store constants
     """
 
-    def __init__(self, title_info=None, link_info=None, date_info=None, news_info=None):
+    def __init__(self):
         """
         Initializes the constants
         """
         self.Data = {
-            "NewsType": news_info,
-            "Title": title_info,
-            "Link": link_info,
-            "Date": date_info,
+            "NewsType": None,
+            "Title": None,
+            "Link": None,
+            "Date": None,
             "API_CALLED": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         }
         # self.upload = sc.db_connection()
@@ -41,20 +41,23 @@ def get_business_news():  #* CODE FIXED?
     json_output = Api()
     soup = BeautifulSoup(requests.get(Api().url[1], timeout=60).text, Api().html_parser)
     news_list = list(map(lambda x: "newslist-" + str(x), range(20)))
+    processedData= list()
 
-    i = 0
-    while i < len(news_list)-1:
+    for i in range(0,len(news_list)):
         process = soup.find("li", {"class": "clearfix", "id": news_list[i]})
         title_info = process.find("h2").find("a").get("title")
         link_info = process.find("h2").find("a").get("href")
         date_info = process.find("span", {"class": "list_dt"})
-        json_output.Data.update(
-            {
+        json_output.Data.update({
             "NewsType": "Business News",
             "Title": title_info,
             "Link": link_info,
             "Date": date_info,
-            }
-        )
-        i += 1
-        return sc.insert_data_to_db(json_output.Data, filters={"NewsType": "Business News"})    
+        })
+        processedData.append(json_output.Data.copy())
+
+    try:
+        sc.insert_data_to_db(data=processedData)
+        print("Data inserted successfully.")
+    except Exception as e:
+        print("Error in inserting data into the database. Error:", e)
