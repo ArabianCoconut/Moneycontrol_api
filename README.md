@@ -64,6 +64,10 @@ wget https://mc-api-j0rn.onrender.com/price/TCS
 
 ## Changelog
 
+- 1.2.1
+  - Database for some reason deletes and inserts few json entries. If bandwidth permits will revist the issue. However, the function will dump all 24 business news to a json file. Code modification required from the users end.
+  - Classes are now moved to its own file and StorageController is a class now.
+  - This project will take a back seat due to limited bandwidth for this project.
 - 1.2.0
   - Stock prices implemented(rudermentry). More elaborate price data will be supported.
   - **Limitation**: Currently due to the structuring of URLs of moneycontrol. Using the API may throw an error on /price/ endpoint if thats the case please raise an issue for me to correct the "symbol". Later on the users themselves can contribute to correct "symbols" moneycontrol uses different "shorthands" hence the limitation.

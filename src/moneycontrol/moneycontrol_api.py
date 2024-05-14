@@ -48,6 +48,8 @@ def get_business_news():
 
     Returns:
     json_data (JSON object): A JSON object containing the title, link, and date of the news
+
+    Issue: Refer to changelog entry 1.2.1
     """
     soup = BeautifulSoup(requests.get(Api().url[1], timeout=60).text, Api().html_parser)
     news_list = list(map(lambda x: "newslist-" + str(x), range(24)))
