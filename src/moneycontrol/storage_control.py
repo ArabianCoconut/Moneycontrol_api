@@ -67,12 +67,6 @@ def insert_data_to_db(data, filters=None):
     except errors.DuplicateKeyError as e:
         logging.warning(f"Data already exists in the database. Error: {str(e)}")
         return dump_all_data_to_json(filters)
-    except errors as e:
-        logging.error(f"Error in inserting data into the database. Error: {str(e)}")
-        return {"status": "Error in inserting data into the database. Please check the logs for more information."}
-    except Exception as e:
-        logging.error(f"Error in inserting data into the database. Error: {str(e)}")
-        return {"status": "Error in inserting data into the database. Please check the logs for more information."}
 
 
 
