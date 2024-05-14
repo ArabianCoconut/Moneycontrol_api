@@ -2,7 +2,7 @@
 # Last Modified: 21/03/2024 (DD/MM/YYYY)
 import requests
 import moneycontrol.moneycontrol_api as mc
-import moneycontrol.storage_control as sc
+from moneycontrol.Classes import Api as Api
 from flask import Flask, request,jsonify, render_template
 
 app = Flask(__name__)
@@ -29,7 +29,7 @@ def api(news):
                 case 'latest':
                     return mc.get_latest_news()
                 case 'list': 
-                        return sc.dump_all_data_to_json()
+                        return Api().StorageController.dump_all_data_to_json()
                 case 'status':
                     return jsonify({"status": "200"})
         case _:

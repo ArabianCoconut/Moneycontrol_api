@@ -1,41 +1,13 @@
 # Author: Arabian Coconut
-# Last Modified: 21/03/2024 (DD/MM/YYYY)
-# Description: This file contains the API for getting the news from the moneycontrol website.
-import datetime
+# Last Modified: 14/05/2024 (DD/MM/YYYY)
+# Description: This file contains the API for getting the news and price from the moneycontrol website.
 from functools import lru_cache
 from os import environ as env
 
 import requests
 from bs4 import BeautifulSoup
 from dotenv import find_dotenv, load_dotenv
-
-import moneycontrol.storage_control as sc
-
-
-# Constants
-class Api:
-    """
-    A class used to store constants
-    """
-
-    def __init__(self):
-        """
-        Initializes the constants
-        """
-        self.Data = {
-            "NewsType": None,
-            "Title": None,
-            "Link": None,
-            "Date": None,
-            "API_CALLED": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        }
-        self.html_parser = "html.parser"
-        self.url = [
-            "https://www.moneycontrol.com/news",
-            "https://www.moneycontrol.com/news/business",
-            "https://www.moneycontrol.com/news/latest-news/",
-        ]
-
+from moneycontrol.Classes import Api
 
 @lru_cache(maxsize=16)
 def get_news():
@@ -51,22 +23,21 @@ def get_news():
     """
     soup = BeautifulSoup(requests.get(Api().url[0], timeout=60).text, Api().html_parser)
     soup_process = soup.find_all("h3", {"class": "related_des"})
-    json_output = Api()
 
     for i in soup_process:
         title_info = i.find("a").get("title")
         link_info = i.find("a").get("href")
-        json_output.Data.update(
-            {
+        Api().StorageController.insert_data_to_db(data={
                 "NewsType": "News",
                 "Title": title_info,
                 "Link": link_info,
+                "Api_Called": Api().date,
             }
         )
-        return sc.insert_data_to_db(json_output.Data, filters={"NewsType": "News"})
+        return Api().StorageController.dump_all_data_to_json(filters={"NewsType": "News"})
 
 
-@lru_cache(maxsize=16)
+@lru_cache(maxsize=30)
 def get_business_news():
     """
     Gets the news from the given URL and returns a JSON object containing the title, link,
@@ -78,29 +49,22 @@ def get_business_news():
     Returns:
     json_data (JSON object): A JSON object containing the title, link, and date of the news
     """
-    json_output = Api()
     soup = BeautifulSoup(requests.get(Api().url[1], timeout=60).text, Api().html_parser)
-    news_list = list(map(lambda x: "newslist-" + str(x), range(20)))
-    processedData= list()
+    news_list = list(map(lambda x: "newslist-" + str(x), range(24)))
 
-    for i in range(0,len(news_list)):
+    for i in range(len(news_list)):
         process = soup.find("li", {"class": "clearfix", "id": news_list[i]})
         title_info = process.find("h2").find("a").get("title")
         link_info = process.find("h2").find("a").get("href")
-        date_info = process.find("span", {"class": "list_dt"})
-        json_output.Data.update({
+        date_info = process.find("span").get_text()
+        Api().StorageController.insert_data_to_db(data={
             "NewsType": "Business News",
             "Title": title_info,
             "Link": link_info,
             "Date": date_info,
+            "Api_Called": Api().date
         })
-        processedData.append(json_output.Data.copy())
-
-    try:
-        sc.insert_data_to_db(data=processedData)
-        print("Data inserted successfully.")
-    except Exception as e:
-        print("Error in inserting data into the database. Error:", e)
+        return Api().StorageController.dump_all_data_to_json(filters={"NewsType": "Business News"})
 
 
 @lru_cache(maxsize=16)
@@ -116,9 +80,7 @@ def get_latest_news():
     json_data (JSON object): A JSON object containing the title, link, and date of the news
     """
 
-    json_output = Api()
     soup = BeautifulSoup(requests.get(Api().url[2], timeout=60).text, Api().html_parser)
-    processed_data = []
     # Get the title, link and date of the news
     related_des_class = soup.find_all("h3", {"class": "related_des"})
     related_date_class = soup.find_all("p", {"class": "related_date hide-mob"})
@@ -126,16 +88,14 @@ def get_latest_news():
         title_info = h3_tag.find("a").get("title")
         link_info = h3_tag.find("a").get("href")
         date_info = p_tag.text
-        json_output.Data.update(
-            {
-                "NewsType": "Latest News",
-                "Title": title_info,
-                "Link": link_info,
-                "Date": date_info,
-            }
-        )
-        processed_data.append(json_output.Data.copy())
-    return sc.insert_data_to_db(processed_data, filters={"NewsType": "Latest News"})
+        Api().StorageController.insert_data_to_db(data={
+            "NewsType": "Latest News",
+            "Title": title_info,
+            "Link": link_info,
+            "Date": date_info,
+            "Api_Called": Api().date
+        })
+    return Api().StorageController.dump_all_data_to_json(filters={"NewsType": "Latest News"})
 
 
 def get_basic_price(symbol):

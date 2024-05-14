@@ -6,7 +6,7 @@ from functools import lru_cache
 import requests
 from bs4 import BeautifulSoup
 
-import moneycontrol.storage_control as sc
+import moneycontrol.storage_controller as sc
 
 
 # Constants
