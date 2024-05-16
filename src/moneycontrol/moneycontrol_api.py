@@ -1,5 +1,5 @@
 # Author: Arabian Coconut
-# Last Modified: 14/05/2024 (DD/MM/YYYY)
+# Last Modified: 16/05/2024 (DD/MM/YYYY)
 # Description: This file contains the API for getting the news and price from the moneycontrol website.
 from functools import lru_cache
 from os import environ as env
@@ -66,7 +66,7 @@ def get_business_news():
             "Date": date_info,
             "Api_Called": Api().date
         })
-        return Api().StorageController.dump_all_data_to_json(filters={"NewsType": "Business News"})
+    return Api().StorageController.dump_all_data_to_json(filters={"NewsType": "Business News"})
 
 
 @lru_cache(maxsize=16)

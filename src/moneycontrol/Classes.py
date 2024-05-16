@@ -5,7 +5,6 @@ from pymongo import MongoClient, errors
 from dotenv import load_dotenv,find_dotenv
 from os import environ as env
 
-
 class Api:
     """
     A class used to store constants
@@ -106,3 +105,6 @@ class StorageController:
         except errors.DuplicateKeyError as e:
             logging.warning(f"Data already exists in the database. Error: {str(e)}")
             return self.dump_all_data_to_json(filters)
+
+
+Api().StorageController.connect_to_db().delete_many({})
