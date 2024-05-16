@@ -3,6 +3,7 @@
 # Description: This file contains the API for getting the news from the moneycontrol website.
 import datetime
 from functools import lru_cache
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -61,8 +62,7 @@ def get_news():
                 "Link": link_info,
             }
         )
-        return sc.insert_data_to_db(json_output.Data,filters={"NewsType": "News"})
-
+        return sc.insert_data_to_db(json_output.Data, filters={"NewsType": "News"})
 
 
 @lru_cache(maxsize=16)
@@ -93,7 +93,7 @@ def get_business_news():
             "Date": date_info,
         }
     )
-    return sc.insert_data_to_db(json_output.Data,filters={"NewsType": "Business News"})
+    return sc.insert_data_to_db(json_output.Data, filters={"NewsType": "Business News"})
 
 
 @lru_cache(maxsize=16)
@@ -126,4 +126,6 @@ def get_latest_news():
                 "Date": date_info,
             }
         )
-        return sc.insert_data_to_db(json_output.Data,filters={"NewsType": "Latest News"})
+        return sc.insert_data_to_db(
+            json_output.Data, filters={"NewsType": "Latest News"}
+        )

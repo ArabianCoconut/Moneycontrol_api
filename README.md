@@ -64,6 +64,9 @@ wget https://mc-api-j0rn.onrender.com/price/TCS
 
 ## Changelog
 
+- 1.2.2
+  - Business news now uploads all news to the database. (BS database issues)
+  - Now bandwidth will be focused on stock metrics.
 - 1.2.1
   - Database for some reason deletes and inserts few json entries. If bandwidth permits will revist the issue. However, the function will dump all 24 business news to a json file. Code modification required from the users end.
   - Classes are now moved to its own file and StorageController is a class now.
