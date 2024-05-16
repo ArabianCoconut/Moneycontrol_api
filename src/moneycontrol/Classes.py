@@ -1,9 +1,10 @@
 import datetime
 import json
 import logging
-from pymongo import MongoClient, errors
-from dotenv import load_dotenv,find_dotenv
 from os import environ as env
+
+from dotenv import find_dotenv, load_dotenv
+from pymongo import MongoClient, errors
 
 
 class Api:
@@ -25,7 +26,6 @@ class Api:
         ]
 
 
-
 class StorageController:
     def __init__(self):
         """Summary
@@ -38,7 +38,9 @@ class StorageController:
         self.DB_COLLECTION = env.get("DB_COLLECTION")
         self.DB_LOGIN = env.get("DB_LOGIN")
         self.client = MongoClient(self.DB_LOGIN)
-        self.db = self.client.get_database(self.DB_NAME).get_collection(self.DB_COLLECTION)
+        self.db = self.client.get_database(self.DB_NAME).get_collection(
+            self.DB_COLLECTION
+        )
 
     def connect_to_db(self):
         """Summary
@@ -49,7 +51,9 @@ class StorageController:
         """
         try:
             self.client = MongoClient(self.DB_LOGIN)
-            self.db = self.client.get_database(self.DB_NAME).get_collection(self.DB_COLLECTION)
+            self.db = self.client.get_database(self.DB_NAME).get_collection(
+                self.DB_COLLECTION
+            )
             return self.db
         except Exception as e:
             print("Error in connecting to database. Error:", e)
@@ -66,21 +70,28 @@ class StorageController:
         json_data (str): The data in JSON format
         """
         try:
-            json_data = json.dumps(list(self.connect_to_db().find(filters)), indent=2, default=str)
+            json_data = json.dumps(
+                list(self.connect_to_db().find(filters)), indent=2, default=str
+            )
             if json_data == "[]":
                 return json.dumps(
                     {
                         "status": "No data found in the database.",
-                        "suggestion": "Please insert some data into the database using the /api/news endpoint."
-                    }, indent=2, default=str)
+                        "suggestion": "Please insert some data into the database using the /api/news endpoint.",
+                    },
+                    indent=2,
+                    default=str,
+                )
             elif filters is None:
-                return json.dumps(list(self.connect_to_db().find()), indent=2, default=str)
+                return json.dumps(
+                    list(self.connect_to_db().find()), indent=2, default=str
+                )
             else:
                 return json_data
         except errors as e:
             return ("Error:", e)
 
-    def insert_data_to_db(self,data, filters=None):
+    def insert_data_to_db(self, data, filters=None):
         """
         Inserts the given data into the database and also returns the inserted data
 
