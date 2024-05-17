@@ -4,7 +4,7 @@
 
 ### Author: Arabian Coconut
 
-#### Docker Version: 1.1.9
+#### Docker Version: 1.2.2
 
 #### Local Version: 1.1.3
 
@@ -20,7 +20,7 @@ Notes:
 - This API is not affiliated with moneycontrol.com in any way.
 - Master branch is for Docker deploy and Local branch is for local deploy.
 
-## How to use api
+## How to use API
 
 ```shell
 wget https://mc-api-j0rn.onrender.com/api/news
@@ -68,26 +68,26 @@ wget https://mc-api-j0rn.onrender.com/price/TCS
   - Business news now uploads all news to the database. (BS database issues)
   - Now bandwidth will be focused on stock metrics.
 - 1.2.1
-  - Database for some reason deletes and inserts few json entries. If bandwidth permits will revist the issue. However, the function will dump all 24 business news to a json file. Code modification required from the users end.
-  - Classes are now moved to its own file and StorageController is a class now.
+  - Database for some reason deletes and inserts a few JSON entries. If bandwidth permits will revise the issue. However, the function will dump all 24 business news into a JSON file. Code modification is required from the user's end.
+  - Classes are now moved to their file and StorageController is a class now.
   - This project will take a back seat due to limited bandwidth for this project.
 - 1.2.0
   - Stock prices implemented(rudermentry). More elaborate price data will be supported.
-  - **Limitation**: Currently due to the structuring of URLs of moneycontrol. Using the API may throw an error on /price/ endpoint if thats the case please raise an issue for me to correct the "symbol". Later on the users themselves can contribute to correct "symbols" moneycontrol uses different "shorthands" hence the limitation.
+  - **Limitation**: Currently due to the structuring of URLs of moneycontrol. Using the API may throw an error on /price/ endpoint if that is the case please raise an issue for me to correct the "symbol". Later on, the users themselves can contribute to correct "symbols" Moneycontrol uses different "shorthands" hence the limitation.
 - 1.1.9
   - Integrated MongoDB for future stock metric implementation.
-  - Removed previous Storage handling methods in favour of MongoDB.
+  - Removed previous Storage handling methods in favor of MongoDB.
 - 1.1.8
   - Minor bug fixes and code cleanup.
   - Performance improvements.
 - 1.1.7
-  - Updated Home page for modern look.
+  - Updated Home page for a modern look.
 - 1.1.6
   - Modified Storage handling for better performance.
-  - Removed static folder from the project as its not required folder.
+  - Removed static folder from the project as it is not a required folder.
 - 1.1.5
   - Added a unique UUID for each request made to the server.
-  - Updated function docs for better understanding of the file_remove and dict_storage.
+  - Updated function docs for a better understanding of the file_remove and dict_storage.
   - api_data.json is now deleted after 7 days of creation or updating.
   - Added new API for server status check.
 - 1.1.4
@@ -99,7 +99,7 @@ wget https://mc-api-j0rn.onrender.com/price/TCS
 
 ## Known Issues
 
-- Business news doesnt upload all 19 links to the database. The code only uploads few of them only.
+- ~Business News doesn't upload all 19 links to the database. The code only uploads a few of them.~ Fixed in 1.2.2
 
 ---
 
