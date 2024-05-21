@@ -1,5 +1,5 @@
 beautifulsoup4 == 4.12.3
-requests == 2.31.0
+requests == 2.32.0
 flask == 3.0.2
 dnspython==2.6.1
 pymongo==4.6.3
