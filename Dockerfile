@@ -18,7 +18,7 @@ ENV FLASK_ENV=ArabianCoconut
 # trunk-ignore(checkov/CKV2_DOCKER_4)
 RUN pip install --upgrade pip && \
     pip install --trusted-host pypi.python.org --no-cache-dir -r requirements.txt && \
-    rm requirements.txt\
+    rm requirements.txt && \
     python3 -m compileall .
 
 # CD into Flask directory
