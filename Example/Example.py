@@ -14,7 +14,6 @@ new_data = json.dumps(data, indent=4)
 new_data = json.loads(new_data)
 
 # get key Api_response and prints value link
-print(new_data['Api_response'][0]['link'])
 
 if __name__ == "__main__":
-    pass
+    print(new_data[0])

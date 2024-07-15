@@ -88,7 +88,7 @@ class StorageController:
                 )
             else:
                 return json_data
-        except errors as e:
+        except Exception as e:
             return ("Error:", e)
 
     def insert_data_to_db(self, data, filters=None):
