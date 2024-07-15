@@ -25,7 +25,7 @@ RUN pip install --upgrade pip && \
     pip install --trusted-host pypi.python.org --no-cache-dir -r requirements.txt && \
     rm requirements.txt
 
-RUN python -m compileall .
+RUN python3 -m compileall .
 
 # CD into Flask directory
 WORKDIR /app/src
