@@ -1,10 +1,10 @@
 FROM python:3.11.4-alpine
 
 # Create a non-root user for the container
-RUN adduser -D myuser
-
+RUN adduser -D user \
+    chown -R user /app
 # Set the user for the container
-USER myuser
+USER user
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "executable" ]
 LABEL maintainer="Arabian Coconut"
 
