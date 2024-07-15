@@ -1,5 +1,12 @@
 FROM python:3.11.4-alpine
-LABEL Author="Arabian Coconut"
+
+# Create a non-root user for the container
+RUN adduser -D myuser
+
+# Set the user for the container
+USER myuser
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "executable" ]
+LABEL maintainer="Arabian Coconut"
 
 # Set the working directory to /app
 WORKDIR /app
@@ -10,12 +17,15 @@ EXPOSE 5000
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_RUN_PORT=5000
-ENV FLASK_ENV=CoconutMagic
+ENV FLASK_ENV=ArabianCoconut
 
 # Install packages specified in requirements.txt
+# trunk-ignore(checkov/CKV2_DOCKER_4)
 RUN pip install --upgrade pip && \
-    pip install --trusted-host pypi.python.org -r requirements.txt && \
+    pip install --trusted-host pypi.python.org --no-cache-dir -r requirements.txt && \
     rm requirements.txt
+
+RUN python -m compileall .
 
 # CD into Flask directory
 WORKDIR /app/src
