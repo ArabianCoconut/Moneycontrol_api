@@ -15,7 +15,6 @@ ENV FLASK_RUN_PORT=5000
 ENV FLASK_ENV=ArabianCoconut
 
 # Install packages specified in requirements.txt
-# trunk-ignore(checkov/CKV2_DOCKER_4)
 RUN pip install --upgrade pip && \
     pip install --trusted-host pypi.python.org --no-cache-dir -r requirements.txt && \
     rm requirements.txt && \
